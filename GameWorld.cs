@@ -29,10 +29,10 @@ namespace Sokoban
         protected override void LoadContent()
         {
             spriteBatch = new SpriteBatch(GraphicsDevice);
-sprite = Content.Load<Texture2D>("block_01");
+            sprite = Content.Load<Texture2D>("block_01");
             // TODO: use this.Content to load your game content here
             rectangle = new Rectangle(0, 0, sprite.Width, sprite.Height);
-            
+
         }
 
         protected override void Update(GameTime gameTime)
