@@ -15,7 +15,7 @@ namespace Sokoban
         public GameWorld()
         {
             graphics = new GraphicsDeviceManager(this);
-            Content.RootDirectory = "Content";
+            Content.RootDirectory = "content";
             IsMouseVisible = true;
         }
 
