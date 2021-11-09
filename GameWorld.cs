@@ -10,6 +10,7 @@ namespace Sokoban
         private SpriteBatch _spriteBatch;
 
         private Rectangle rectangle;
+        private Texture2D sprite;
 
         public GameWorld()
         {
@@ -31,6 +32,7 @@ namespace Sokoban
 
             // TODO: use this.Content to load your game content here
             rectangle = new Rectangle(0, 0, 1, 1);
+            sprite = Content.Load<Texture2D>("block_01");
         }
 
         protected override void Update(GameTime gameTime)
@@ -48,6 +50,9 @@ namespace Sokoban
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
             // TODO: Add your drawing code here
+            _spriteBatch.Begin();
+            _spriteBatch.Draw(sprite, rectangle, Color.White);
+            _spriteBatch.End();
 
             base.Draw(gameTime);
         }
