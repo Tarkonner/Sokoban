@@ -35,15 +35,11 @@ namespace Sokoban
 
         public abstract void Update(GameTime gameTime);
 
+        public abstract void LoadContent(ContentManager content);
 
-        public void LoadContent(ContentManager content)
-        {
 
-        }
-        public void Draw(SpriteBatch spriteBatch)
-        {
-
-        }
+        public abstract void Draw(SpriteBatch spriteBatch);
+       
 
     }
 }
