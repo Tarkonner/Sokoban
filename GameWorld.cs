@@ -1,6 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using System.Collections.Generic;
 
 namespace Sokoban
 {
@@ -9,13 +10,14 @@ namespace Sokoban
         private GraphicsDeviceManager graphics;
         private SpriteBatch spriteBatch;
 
-        private Rectangle rectangle;
-        private Texture2D sprite;
+        List<GameObject> gameObject = new List<GameObject>();
+
+        const int gridSize = 64;
 
         public GameWorld()
         {
             graphics = new GraphicsDeviceManager(this);
-            Content.RootDirectory = "content";
+            Content.RootDirectory = "Content";
             IsMouseVisible = true;
         }
 
@@ -29,9 +31,15 @@ namespace Sokoban
         protected override void LoadContent()
         {
             spriteBatch = new SpriteBatch(GraphicsDevice);
-            sprite = Content.Load<Texture2D>("block_01");
-            // TODO: use this.Content to load your game content here
-            rectangle = new Rectangle(0, 0, sprite.Width, sprite.Height);
+
+            gameObject.Add(new Box( new Vector2(gridSize,gridSize) ));
+            gameObject.Add(new Box(new Vector2(gridSize * 2, gridSize * 2)));
+
+            foreach (var item in gameObject)
+            {
+                item.LoadContent(Content);
+            }
+
 
         }
 
@@ -51,7 +59,10 @@ namespace Sokoban
 
             // TODO: Add your drawing code here
             spriteBatch.Begin();
-            spriteBatch.Draw(sprite, rectangle, Color.White);
+            foreach (var item in gameObject)
+            {
+                item.Draw(spriteBatch);
+            }
             spriteBatch.End();
 
             base.Draw(gameTime);

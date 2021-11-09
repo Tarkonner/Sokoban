@@ -13,7 +13,7 @@ namespace Sokoban
     {
         public Vector2 position;
         public float rotaton;
-        public Vector2 scale;
+        public Vector2 scale = Vector2.One;
 
         // rendering
         public float layerDepth;
