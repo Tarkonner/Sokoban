@@ -6,15 +6,15 @@ namespace Sokoban
 {
     public class GameWorld : Game
     {
-        private GraphicsDeviceManager _graphics;
-        private SpriteBatch _spriteBatch;
+        private GraphicsDeviceManager graphics;
+        private SpriteBatch spriteBatch;
 
         private Rectangle rectangle;
         private Texture2D sprite;
 
         public GameWorld()
         {
-            _graphics = new GraphicsDeviceManager(this);
+            graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
             IsMouseVisible = true;
         }
@@ -28,7 +28,7 @@ namespace Sokoban
 
         protected override void LoadContent()
         {
-            _spriteBatch = new SpriteBatch(GraphicsDevice);
+            spriteBatch = new SpriteBatch(GraphicsDevice);
 sprite = Content.Load<Texture2D>("block_01");
             // TODO: use this.Content to load your game content here
             rectangle = new Rectangle(0, 0, sprite.Width, sprite.Height);
@@ -50,9 +50,9 @@ sprite = Content.Load<Texture2D>("block_01");
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
             // TODO: Add your drawing code here
-            _spriteBatch.Begin();
-            _spriteBatch.Draw(sprite, rectangle, Color.White);
-            _spriteBatch.End();
+            spriteBatch.Begin();
+            spriteBatch.Draw(sprite, rectangle, Color.White);
+            spriteBatch.End();
 
             base.Draw(gameTime);
         }
