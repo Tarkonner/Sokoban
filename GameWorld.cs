@@ -36,7 +36,7 @@ namespace Sokoban
             gameObject.Add(new Box(new Vector2(gridSize * 2, gridSize * 2)));
             gameObject.Add(new Box(new Vector2(gridSize * 3, gridSize * 3)));
 
-            gameObject.Add(new Player(new Vector2(gridSize * 3, gridSize * 3), graphics));
+            gameObject.Add(new Player(new Vector2(2,2), graphics));
 
             foreach (var item in gameObject)
             {

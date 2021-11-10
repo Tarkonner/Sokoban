@@ -13,27 +13,22 @@ namespace Sokoban
 
         private GraphicsDeviceManager graphicsPlayer;
 
-        private float timeBetweenMovement = .9f;
+
+        private float timeBetweenMovement = .3f;
         private float movementClock = 0;
+        private int maxX = 12;
+        private int maxY = 8;
 
         public Player(Vector2 position, GraphicsDeviceManager graphics)
         {
-            this.position = position;
+            gridPosition = position;
+            this.position = GridPlacement.Placement(gridPosition);
 
             this.graphicsPlayer = graphics;
-
 
         }
 
 
-        //protected void Move(GameTime gameTime)
-        //{
-        //    float de = (float)gameTime.ElapsedGameTime.TotalSeconds;
-
-        //    position += ((playerInput * Speed) * de);
-
-
-        //}
 
         public override void Draw(SpriteBatch spriteBatch)
         {
@@ -65,8 +60,8 @@ namespace Sokoban
             playerInput = Vector2.Zero;
             KeyboardState keyboard = Keyboard.GetState();
 
-            int de = (int)gameTime.ElapsedGameTime.TotalSeconds;
-            movementClock -= de ;
+            float de = (float)gameTime.ElapsedGameTime.TotalSeconds;
+            movementClock -= de;
 
             //Input
             if (keyboard.IsKeyDown(Keys.D))
@@ -74,30 +69,42 @@ namespace Sokoban
                 playerInput = new Vector2(1, 0);
 
             }
+            else if (keyboard.IsKeyDown(Keys.A))
+            {
+                playerInput = new Vector2(-1, 0);
+            }
+            else if (keyboard.IsKeyDown(Keys.W))
+            {
+                playerInput = new Vector2(0, -1);
+            }
+            else if (keyboard.IsKeyDown(Keys.S))
+            {
+                playerInput = new Vector2(0, 1);
+            }
 
 
             //Movement
-            if(movementClock <= 0)
+            if (movementClock <= 0 && playerInput != Vector2.Zero)
             {
-            
-                movementClock = timeBetweenMovement;
 
-                gridPosition += playerInput;
+                //Bounds
+                if(gridPosition.X + playerInput.X >= 0
+                    && gridPosition.X + playerInput.X < maxX 
+                    && gridPosition.Y + playerInput.Y >= 0
+                    && gridPosition.Y + playerInput.Y < maxY
+                    )
+                {
+                    movementClock = timeBetweenMovement;
 
-                position = GridPlacement.Placement(gridPosition);
+                    gridPosition += playerInput;
+
+                    position = GridPlacement.Placement(gridPosition);
+                }
 
 
-                
             }
 
-           
-
-
-
-
-
         }
-
 
         public override void Update(GameTime gameTime)
         {
