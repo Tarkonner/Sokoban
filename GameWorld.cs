@@ -36,7 +36,7 @@ namespace Sokoban
             gameObject.Add(new Box(new Vector2(gridSize * 2, gridSize * 2)));
             gameObject.Add(new Box(new Vector2(gridSize * 3, gridSize * 3)));
 
-            gameObject.Add(new Player(new Vector2(gridSize * 3, gridSize * 3)));
+            gameObject.Add(new Player(new Vector2(gridSize * 3, gridSize * 3), graphics));
 
             foreach (var item in gameObject)
             {
@@ -52,7 +52,10 @@ namespace Sokoban
                 Exit();
 
             // TODO: Add your update logic here
-
+            foreach (var item in gameObject)
+            {
+                item.Update(gameTime);
+            }
             base.Update(gameTime);
         }
 

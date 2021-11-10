@@ -30,7 +30,8 @@ namespace Sokoban
                     return new Vector2(sprite.Width / 2, sprite.Height / 2 );
                 }
                 return Vector2.Zero;
-            } 
+            }
+            
         }
 
         public abstract void Update(GameTime gameTime);
