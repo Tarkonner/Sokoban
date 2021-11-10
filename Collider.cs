@@ -36,7 +36,7 @@ namespace Sokoban
         public void CheckCollision(GameObject other)
         {
             Collider otherCol = other.Collider;
-            if (otherCol == null)
+            if (otherCol == null || otherCol.trigger)
                 return;
 
             if (GetCollisionBox(other).Intersects(otherCol.GetCollisionBox(parent)))

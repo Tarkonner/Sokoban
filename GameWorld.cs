@@ -14,6 +14,8 @@ namespace Sokoban
 
         const int gridSize = 64;
 
+        Texture2D collisionTexture;
+
         public GameWorld()
         {
             graphics = new GraphicsDeviceManager(this);
@@ -68,10 +70,30 @@ namespace Sokoban
             foreach (var item in gameObject)
             {
                 item.Draw(spriteBatch);
+
+                DrawCollisionBox(item);
             }
             spriteBatch.End();
 
             base.Draw(gameTime);
+        }
+
+        private void DrawCollisionBox(GameObject go)
+        {
+            Collider col = go.Collider;
+            if (col == null)
+                return;
+
+            Rectangle collisionBox = col.GetCollisionBox(go);
+            Rectangle topline = new Rectangle(collisionBox.X, collisionBox.Y, collisionBox.Width, 1);
+            Rectangle bottomLine = new Rectangle(collisionBox.X, collisionBox.Y + collisionBox.Height, collisionBox.Width, 1);
+            Rectangle rightLine = new Rectangle(collisionBox.X + collisionBox.Width, collisionBox.Y, 1, collisionBox.Height);
+            Rectangle leftLine = new Rectangle(collisionBox.X, collisionBox.Y, 1, collisionBox.Height);
+
+            spriteBatch.Draw(collisionTexture, topline, null, Color.Red, 0, Vector2.Zero, SpriteEffects.None, 1);
+            spriteBatch.Draw(collisionTexture, bottomLine, null, Color.Red, 0, Vector2.Zero, SpriteEffects.None, 1);
+            spriteBatch.Draw(collisionTexture, rightLine, null, Color.Red, 0, Vector2.Zero, SpriteEffects.None, 1);
+            spriteBatch.Draw(collisionTexture, leftLine, null, Color.Red, 0, Vector2.Zero, SpriteEffects.None, 1);
         }
     }
 }
