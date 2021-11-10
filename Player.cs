@@ -9,18 +9,20 @@ namespace Sokoban
     {
         public Vector2 velocity;
 
-        public float Speed { get => speed; set => speed = value; }
+   
 
         private float speed = 200.101f;
 
-        private GraphicsDeviceManager _graphics;
+        private GraphicsDeviceManager graphicsPlayer;
         private bool testc = false;
+
+        public float Speed { get => speed; set => speed = value; }
 
         public Player(Vector2 position, GraphicsDeviceManager graphics)
         {
             this.position = position;
 
-            this._graphics = graphics;
+            this.graphicsPlayer = graphics;
 
 
         }
