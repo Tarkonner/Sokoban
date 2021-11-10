@@ -17,7 +17,7 @@ namespace Sokoban
         private float speed = 200.101f;
 
         private GraphicsDeviceManager _graphics;
-
+        private bool testc = false;
 
         public Player(Vector2 position, GraphicsDeviceManager graphics)
         {
@@ -59,17 +59,11 @@ namespace Sokoban
 
             sprite = animations[0];
 
-            this.position = new Vector2();
-
-            //this.Origen = new Vector2(sprite.Height / 2, sprite.Width / 2);
-
-
-
             rectangle = new Rectangle(0, 0, sprite.Width, sprite.Height);
         }
 
 
-        private void Input()
+        private void Movement()
         {
             velocity = Vector2.Zero;
             KeyboardState keyboard = Keyboard.GetState();
@@ -77,7 +71,17 @@ namespace Sokoban
             if (keyboard.IsKeyDown(Keys.W))
             {
                 velocity += new Vector2(0, -1);
+                testc = true;
             }
+            if (testc == false)
+            {
+            if (keyboard.IsKeyDown(Keys.D))
+            {
+                velocity += new Vector2(1, 0);
+            }
+            }
+
+
 
 
             if (velocity != Vector2.Zero)
@@ -92,7 +96,7 @@ namespace Sokoban
 
         public override void Update(GameTime gameTime)
         {
-            Input();
+            Movement();
             Move(gameTime);
         }
     }
