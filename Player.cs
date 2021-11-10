@@ -2,9 +2,6 @@
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace Sokoban
 {
@@ -54,7 +51,7 @@ namespace Sokoban
             //}
 
 
-            animations[0] = content.Load<Texture2D>("player_01" );
+            animations[0] = content.Load<Texture2D>("player_01");
 
 
             sprite = animations[0];
@@ -68,21 +65,72 @@ namespace Sokoban
             velocity = Vector2.Zero;
             KeyboardState keyboard = Keyboard.GetState();
 
-            if (keyboard.IsKeyDown(Keys.W))
+
+            if (testc == false)
             {
-                velocity += new Vector2(0, -1);
-                testc = true;
+                if (keyboard.IsKeyDown(Keys.W))
+                {
+
+                    velocity += new Vector2(0, -1);
+
+                    testc = true;
+
+
+                }
+
+            }
+
+            if (testc == false)
+            {
+                if (keyboard.IsKeyDown(Keys.D))
+                {
+                    velocity += new Vector2(1, 0);
+                    testc = true;
+                }
+
             }
             if (testc == false)
             {
-            if (keyboard.IsKeyDown(Keys.D))
+                if (keyboard.IsKeyDown(Keys.A))
+                {
+                    velocity += new Vector2(-1, 0);
+                    testc = true;
+                }
+
+            }
+            if (testc == false)
             {
-                velocity += new Vector2(1, 0);
+                if (keyboard.IsKeyDown(Keys.S))
+                {
+                    velocity += new Vector2(0, 1);
+                    testc = true;
+                }
             }
+
+
+            if (testc != false)
+            {
+
+
+
+                if (keyboard.IsKeyUp(Keys.D))
+                {
+                    testc = false;
+                }
+                if (keyboard.IsKeyUp(Keys.W))
+                {
+                    testc = false;
+                }
+                if (keyboard.IsKeyUp(Keys.A))
+                {
+                    testc = false;
+                }
+                if (keyboard.IsKeyUp(Keys.S))
+                {
+                    testc = false;
+                }
+
             }
-
-
-
 
             if (velocity != Vector2.Zero)
             {
