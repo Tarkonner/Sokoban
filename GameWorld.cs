@@ -37,10 +37,8 @@ namespace Sokoban
             collisionTexture = Content.Load<Texture2D>("CollisionTexture");
 
             gameObject.Add(new Box( new Vector2(1,3) ));
-            gameObject.Add(new Box(new Vector2(2,3)));
-            gameObject.Add(new Box(new Vector2(3,4)));
 
-            gameObject.Add(new Player(new Vector2(2,2), graphics));
+            gameObject.Add(new Player(new Vector2(3,1), graphics));
 
 
             foreach (var item in gameObject)
@@ -60,6 +58,14 @@ namespace Sokoban
             foreach (var item in gameObject)
             {
                 item.Update(gameTime);
+
+                foreach (GameObject other in gameObject)
+                {
+                    if(item != other && other.Collider != null)
+                    {
+                        item.Collider.CheckCollision(other);
+                    }
+                }
             }
             base.Update(gameTime);
         }

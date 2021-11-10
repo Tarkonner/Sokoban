@@ -26,7 +26,7 @@ namespace Sokoban
 
             this.graphicsPlayer = graphics;
 
-            collider = new Collider(this);
+            collider = new PlayerCollider(this);
         }
 
 
