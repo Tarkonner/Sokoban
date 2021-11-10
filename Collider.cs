@@ -11,7 +11,7 @@ namespace Sokoban
         private GameObject parent;
         private bool trigger;
 
-        public Collider(GameObject gameObject, bool isTriggerCollider)
+        public Collider(GameObject gameObject, bool isTriggerCollider = false)
         {
             parent = gameObject;
             trigger = isTriggerCollider;

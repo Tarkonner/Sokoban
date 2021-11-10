@@ -24,7 +24,7 @@ namespace Sokoban
         protected float animationSpeed;
 
         //Collision
-        private Collider collider;
+        protected Collider collider;
 
 
         public Vector2 Origen { 

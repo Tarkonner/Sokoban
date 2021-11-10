@@ -34,11 +34,14 @@ namespace Sokoban
         {
             spriteBatch = new SpriteBatch(GraphicsDevice);
 
-            gameObject.Add(new Box( new Vector2(gridSize,gridSize) ));
-            gameObject.Add(new Box(new Vector2(gridSize * 2, gridSize * 2)));
-            gameObject.Add(new Box(new Vector2(gridSize * 3, gridSize * 3)));
+            collisionTexture = Content.Load<Texture2D>("CollisionTexture");
+
+            gameObject.Add(new Box( new Vector2(1,3) ));
+            gameObject.Add(new Box(new Vector2(2,3)));
+            gameObject.Add(new Box(new Vector2(3,4)));
 
             gameObject.Add(new Player(new Vector2(2,2), graphics));
+
 
             foreach (var item in gameObject)
             {

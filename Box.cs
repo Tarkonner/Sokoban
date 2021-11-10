@@ -7,18 +7,28 @@ using System.Text;
 
 namespace Sokoban
 {
-    class Box : GameObject
-    {        
+   public class Box : GameObject
+    {
+
+        private Vector2 gridPosition;
+
         public Box(Vector2 position)
         {
-            this.position = position;
+            gridPosition = position;
 
-            
+            this.position = GridPlacement.Placement(gridPosition);
+
+
+
+            collider = new Collider(this);
+
 
         }
         public override void LoadContent(ContentManager content)
         {
             sprite = content.Load<Texture2D>("crate_01");
+
+            
 
             rectangle = new Rectangle(0, 0, sprite.Width, sprite.Height);
        
