@@ -7,16 +7,14 @@ namespace Sokoban
 {
     public class Player : GameObject
     {
-        public Vector2 velocity;
+        public Vector2 playerInput = Vector2.Zero;
 
-   
-
-        private float speed = 200.101f;
+        private Vector2 gridPosition;
 
         private GraphicsDeviceManager graphicsPlayer;
-        private bool testc = false;
 
-        public float Speed { get => speed; set => speed = value; }
+        private float timeBetweenMovement = .9f;
+        private float movementClock = 0;
 
         public Player(Vector2 position, GraphicsDeviceManager graphics)
         {
@@ -28,14 +26,14 @@ namespace Sokoban
         }
 
 
-        protected void Move(GameTime gameTime)
-        {
-            float de = (float)gameTime.ElapsedGameTime.TotalSeconds;
+        //protected void Move(GameTime gameTime)
+        //{
+        //    float de = (float)gameTime.ElapsedGameTime.TotalSeconds;
 
-            position += ((velocity * Speed) * de);
+        //    position += ((playerInput * Speed) * de);
 
 
-        }
+        //}
 
         public override void Draw(SpriteBatch spriteBatch)
         {
@@ -62,82 +60,39 @@ namespace Sokoban
         }
 
 
-        private void Movement()
+        private void Movement(GameTime gameTime)
         {
-            velocity = Vector2.Zero;
+            playerInput = Vector2.Zero;
             KeyboardState keyboard = Keyboard.GetState();
 
+            int de = (int)gameTime.ElapsedGameTime.TotalSeconds;
+            movementClock -= de ;
 
-            if (testc == false)
+            //Input
+            if (keyboard.IsKeyDown(Keys.D))
             {
-                if (keyboard.IsKeyDown(Keys.W))
-                {
-
-                    velocity += new Vector2(0, -1);
-
-                    testc = true;
-
-
-                }
+                playerInput = new Vector2(1, 0);
 
             }
 
-            if (testc == false)
-            {
-                if (keyboard.IsKeyDown(Keys.D))
-                {
-                    velocity += new Vector2(1, 0);
-                    testc = true;
-                }
 
-            }
-            if (testc == false)
+            //Movement
+            if(movementClock <= 0)
             {
-                if (keyboard.IsKeyDown(Keys.A))
-                {
-                    velocity += new Vector2(-1, 0);
-                    testc = true;
-                }
+            
+                movementClock = timeBetweenMovement;
 
-            }
-            if (testc == false)
-            {
-                if (keyboard.IsKeyDown(Keys.S))
-                {
-                    velocity += new Vector2(0, 1);
-                    testc = true;
-                }
+                gridPosition += playerInput;
+
+                position = GridPlacement.Placement(gridPosition);
+
+
+                
             }
 
-
-            if (testc != false)
-            {
+           
 
 
-
-                if (keyboard.IsKeyUp(Keys.D))
-                {
-                    testc = false;
-                }
-                if (keyboard.IsKeyUp(Keys.W))
-                {
-                    testc = false;
-                }
-                if (keyboard.IsKeyUp(Keys.A))
-                {
-                    testc = false;
-                }
-                if (keyboard.IsKeyUp(Keys.S))
-                {
-                    testc = false;
-                }
-
-            }
-
-            if (velocity != Vector2.Zero)
-            {
-                velocity.Normalize();
-            }
 
 
 
@@ -146,8 +101,8 @@ namespace Sokoban
 
         public override void Update(GameTime gameTime)
         {
-            Movement();
-            Move(gameTime);
+            Movement(gameTime);
+            //Move(gameTime);
         }
     }
 }
