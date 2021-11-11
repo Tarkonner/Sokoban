@@ -44,7 +44,7 @@ namespace Sokoban
             {
                 item.LoadContent(Content);
                 //Test
-                LookAround.rectangles.Add(item);
+                LookAround.objects.Add(item);
             }
 
 
