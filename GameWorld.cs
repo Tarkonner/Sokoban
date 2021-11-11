@@ -12,8 +12,6 @@ namespace Sokoban
 
         List<GameObject> gameObject = new List<GameObject>();
 
-        const int gridSize = 64;
-
         Texture2D collisionTexture;
 
         public GameWorld()

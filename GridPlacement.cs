@@ -7,15 +7,14 @@ namespace Sokoban
 {
    public static class GridPlacement
     {
-
+        const int gridSize = 64;
 
         public static Vector2 Placement(Vector2 dir)
         {
-            Vector2 result =  new Vector2(64 / 2 + dir.X * 64 ,64 / 2 + dir.Y * 64);
+            Vector2 result =  new Vector2(dir.X * gridSize + gridSize / 2,
+                dir.Y * gridSize + gridSize / 2);
 
             return result;
         }
-
-
     }
 }
