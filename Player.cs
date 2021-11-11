@@ -22,7 +22,7 @@ namespace Sokoban
 
         private bool placeTaken = false;
 
-        public Player(Vector2 position, GraphicsDeviceManager graphics)
+        public Player(Vector2 position, GraphicsDeviceManager graphics, bool isTriggerCollider = false) : base(isTriggerCollider)
         {
             gridPosition = position;
             this.position = GridPlacement.Placement(gridPosition);
@@ -92,6 +92,10 @@ namespace Sokoban
 
         }
 
+        public override void Update(GameTime gameTime)
+        {
+            throw new System.NotImplementedException();
+        }
 
         private void Movement(GameTime gameTime)
         {
@@ -132,7 +136,7 @@ namespace Sokoban
 
             //Movement
             if (movementClock <= 0 && playerInput != Vector2.Zero && !placeTaken)
-
+            { 
                 //Bounds
                 if (gridPosition.X + playerInput.X >= 0
                     && gridPosition.X + playerInput.X < maxX
@@ -147,6 +151,7 @@ namespace Sokoban
                     position = GridPlacement.Placement(gridPosition);
                 }
 
+<<<<<<< HEAD
 
             }
 
@@ -158,17 +163,10 @@ namespace Sokoban
             {
             Animate(gameTime);
                 
+=======
+>>>>>>> 5b7cc276639634e0612a37b11a645fd0d8e61edb
             }
 
-            AnimateD(gameTime);
-            Movement(gameTime);
-
-            //Move(gameTime);
-        }
-
-        public override void OnCollision(GameObject other)
-        {
-            base.OnCollision(other);
         }
     }
 }
