@@ -8,22 +8,18 @@ namespace Sokoban
 
     public abstract class GameObject
     {
+        //Transform
         public Vector2 position;
         public float rotaton;
         public Vector2 scale = Vector2.One;
 
-        // rendering
+        //Rendering
         public float layerDepth;
         protected SpriteEffects effect;
         public Rectangle rectangle;
 
-        // sprite
+        //Animation
         protected Texture2D sprite;
-
-
-        /// <summary>
-        /// animations
-        /// </summary>
         protected Texture2D[] animations;
         protected float animationSpeed;
         private float timeEapsed;
@@ -54,7 +50,7 @@ namespace Sokoban
             spriteBatch.Draw(sprite, rectangle, null, Color.White, rotaton, Origen, effect, layerDepth);
         }
 
-        public void Animate(GameTime gameTime)
+        public virtual void Animate(GameTime gameTime)
         {
             timeEapsed += (float)gameTime.ElapsedGameTime.TotalSeconds;
 
@@ -67,12 +63,7 @@ namespace Sokoban
                 timeEapsed = 0;
 
                 currenIndex = 0;
-
             }
-
-
         }
-
-
     }
 }

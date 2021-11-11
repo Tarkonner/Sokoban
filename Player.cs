@@ -7,17 +7,18 @@ namespace Sokoban
 {
     public class Player : GameObjectWithCollider
     {
-        public Vector2 playerInput = Vector2.Zero;
-
-        private Vector2 gridPosition;
-
         private GraphicsDeviceManager graphicsPlayer;
-        private bool placeTaken = false;
-
+        
+        //Movement
+        public Vector2 playerInput = Vector2.Zero;
+        private Vector2 gridPosition;
         private float timeBetweenMovement = .3f;
         private float movementClock = 0;
         private int maxX = 12;
         private int maxY = 8;
+
+        //Animation
+
 
         public Player(Vector2 position, GraphicsDeviceManager graphics)
         {
@@ -32,22 +33,17 @@ namespace Sokoban
 
         public override void LoadContent(ContentManager content)
         {
-
+            //Load animations
             animations = new Texture2D[3];
-            //animations = new Texture2D[24];
-            //animations = new Texture2D[24];
 
             for (int i = 2; i <= 4; i++)
             {
                 animations[i - 2] = content.Load<Texture2D>("player_0" + i);
             }
 
-
-            //animations[0] = content.Load<Texture2D>("player_01");
-
-
             sprite = animations[0];
 
+            //Rec
             rectangle = new Rectangle((int)position.X, (int)position.Y, sprite.Width, sprite.Height);
         }
 
@@ -79,10 +75,12 @@ namespace Sokoban
                 playerInput = new Vector2(0, 1);
             }
 
-            placeTaken = LookAround.LookAt(GridPlacement.Placement(gridPosition + playerInput));
+
+            var placeTaken = LookAround.LookAt(GridPlacement.Placement(gridPosition + playerInput));
+
 
             //Movement
-            if (movementClock <= 0 && playerInput != Vector2.Zero && !placeTaken)
+            if (movementClock <= 0 && playerInput != Vector2.Zero && !placeTaken.Item1)
             {
                 //Bounds
                 if(gridPosition.X + playerInput.X >= 0

@@ -34,7 +34,8 @@ namespace Sokoban
 
             collisionTexture = Content.Load<Texture2D>("CollisionTexture");
 
-            gameObject.Add(new Box(new Vector2(1,3)));
+            gameObject.Add(new Box(new Vector2(1, 3)));
+            gameObject.Add(new Box(new Vector2(4, 4)));
 
             gameObject.Add(new Player(new Vector2(2,2), graphics));
 
