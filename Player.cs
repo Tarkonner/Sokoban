@@ -156,7 +156,7 @@ namespace Sokoban
         {
             if (trueAnimationsW == true)
             {
-                Animate(gameTime);
+            Animate(gameTime);
                 
             }
 
