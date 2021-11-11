@@ -26,7 +26,7 @@ namespace Sokoban
 
             this.graphicsPlayer = graphics;
 
-            animationSpeed = 8;
+            
         }
 
 
