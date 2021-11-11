@@ -25,6 +25,11 @@ namespace Sokoban
         /// animations
         /// </summary>
         protected Texture2D[] animations;
+        protected Texture2D[] animationsD;
+        protected Texture2D[] animationsS;
+        protected Texture2D[] animationsA;
+
+        protected Texture2D[] animationsElse;
         protected float animationSpeed;
         private float timeEapsed;
         private int currenIndex;
@@ -63,6 +68,25 @@ namespace Sokoban
             sprite = animations[currenIndex];
 
             if (currenIndex >= animations.Length - 1)
+            {
+                timeEapsed = 0;
+
+                currenIndex = 0;
+
+            }
+
+
+        }
+
+        public void AnimateD(GameTime gameTime)
+        {
+            timeEapsed += (float)gameTime.ElapsedGameTime.TotalSeconds;
+
+            currenIndex = (int)(timeEapsed * animationSpeed);
+
+            sprite = animationsD[currenIndex];
+
+            if (currenIndex >= animationsD.Length - 1)
             {
                 timeEapsed = 0;
 

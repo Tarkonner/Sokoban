@@ -20,6 +20,8 @@ namespace Sokoban
         private int maxX = 12;
         private int maxY = 8;
 
+        private bool placeTaken = false;
+
         public Player(Vector2 position, GraphicsDeviceManager graphics)
         {
             gridPosition = position;
@@ -82,7 +84,7 @@ namespace Sokoban
 
 
 
-            rectangle = new Rectangle(0, 0, sprite.Width, sprite.Height);
+            rectangle = new Rectangle((int)position.X, (int)position.Y, sprite.Width, sprite.Height);
 
 
 
@@ -129,8 +131,7 @@ namespace Sokoban
 
 
             //Movement
-            if (movementClock <= 0 && playerInput != Vector2.Zero)
-            {
+            if (movementClock <= 0 && playerInput != Vector2.Zero && !placeTaken)
 
                 //Bounds
                 if (gridPosition.X + playerInput.X >= 0
