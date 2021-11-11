@@ -92,10 +92,7 @@ namespace Sokoban
 
         }
 
-        public override void Update(GameTime gameTime)
-        {
-            throw new System.NotImplementedException();
-        }
+  
 
         private void Movement(GameTime gameTime)
         {
@@ -151,7 +148,7 @@ namespace Sokoban
                     position = GridPlacement.Placement(gridPosition);
                 }
 
-<<<<<<< HEAD
+
 
             }
 
@@ -161,12 +158,21 @@ namespace Sokoban
         {
             if (trueAnimationsW == true)
             {
-            Animate(gameTime);
-                
-=======
->>>>>>> 5b7cc276639634e0612a37b11a645fd0d8e61edb
+                Animate(gameTime);
+
             }
 
+            AnimateD(gameTime);
+            Movement(gameTime);
+
+            //Move(gameTime);
         }
+
+        public override void OnCollision(GameObject other)
+        {
+            base.OnCollision(other);
+        }
+
     }
-}
+    }
+
