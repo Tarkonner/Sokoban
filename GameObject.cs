@@ -23,8 +23,6 @@ namespace Sokoban
         protected Texture2D sprite;
         protected float animationSpeed;
 
-        //Collision
-        protected Collider collider;
 
 
         public Vector2 Origen { 
@@ -37,7 +35,6 @@ namespace Sokoban
             } 
         }
         public Texture2D Sprite { get => sprite; set => sprite = value; }
-        public Collider Collider { get => collider; set => collider = value; }
 
         public abstract void Update(GameTime gameTime);
 

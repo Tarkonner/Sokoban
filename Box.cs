@@ -7,7 +7,7 @@ using System.Text;
 
 namespace Sokoban
 {
-   public class Box : GameObject
+   public class Box : GameObjectWithCollider
     {
 
         private Vector2 gridPosition;
@@ -17,10 +17,6 @@ namespace Sokoban
             gridPosition = position;
 
             this.position = GridPlacement.Placement(gridPosition);
-
-
-
-            collider = new Collider(this);
 
 
         }

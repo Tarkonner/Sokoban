@@ -8,6 +8,7 @@ namespace Sokoban
 {
     public class Collider
     {
+        /*
         private GameObject parent;
         private bool trigger;
 
@@ -44,5 +45,6 @@ namespace Sokoban
                 OnCollision(other);
             }
         }
+        */
     }
 }

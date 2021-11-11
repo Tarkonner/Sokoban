@@ -5,7 +5,7 @@ using Microsoft.Xna.Framework.Input;
 
 namespace Sokoban
 {
-    public class Player : GameObject
+    public class Player : GameObjectWithCollider
     {
         public Vector2 playerInput = Vector2.Zero;
 
@@ -25,8 +25,6 @@ namespace Sokoban
             this.position = GridPlacement.Placement(gridPosition);
 
             this.graphicsPlayer = graphics;
-
-            collider = new PlayerCollider(this);
         }
 
 
@@ -111,6 +109,11 @@ namespace Sokoban
         {
             Movement(gameTime);
             //Move(gameTime);
+        }
+
+        public override void OnCollision(GameObject other)
+        {
+            base.OnCollision(other);
         }
     }
 }

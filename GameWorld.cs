@@ -36,7 +36,7 @@ namespace Sokoban
 
             collisionTexture = Content.Load<Texture2D>("CollisionTexture");
 
-            gameObject.Add(new Box( new Vector2(1,3) ));
+            gameObject.Add(new Box(new Vector2(1,3)));
 
             gameObject.Add(new Player(new Vector2(3,1), graphics));
 
@@ -55,15 +55,16 @@ namespace Sokoban
                 Exit();
 
             // TODO: Add your update logic here
-            foreach (var item in gameObject)
+            foreach (GameObjectWithCollider item in gameObject)
             {
                 item.Update(gameTime);
 
-                foreach (GameObject other in gameObject)
+                //Collision
+                foreach (GameObjectWithCollider other in gameObject)
                 {
-                    if(item != other && other.Collider != null)
+                    if(item != other && other is GameObjectWithCollider && item is GameObjectWithCollider)
                     {
-                        item.Collider.CheckCollision(other);
+                        item.CheckCollision(other);
                     }
                 }
             }
@@ -80,20 +81,18 @@ namespace Sokoban
             {
                 item.Draw(spriteBatch);
 
-                DrawCollisionBox(item);
+                if (item is GameObjectWithCollider)
+                    DrawCollisionBox((GameObjectWithCollider)item);
             }
             spriteBatch.End();
 
             base.Draw(gameTime);
         }
 
-        private void DrawCollisionBox(GameObject go)
+        private void DrawCollisionBox(GameObjectWithCollider go)
         {
-            Collider col = go.Collider;
-            if (col == null)
-                return;
 
-            Rectangle collisionBox = col.GetCollisionBox(go);
+            Rectangle collisionBox = go.GetCollisionBox();
             Rectangle topline = new Rectangle(collisionBox.X, collisionBox.Y, collisionBox.Width, 1);
             Rectangle bottomLine = new Rectangle(collisionBox.X, collisionBox.Y + collisionBox.Height, collisionBox.Width, 1);
             Rectangle rightLine = new Rectangle(collisionBox.X + collisionBox.Width, collisionBox.Y, 1, collisionBox.Height);
