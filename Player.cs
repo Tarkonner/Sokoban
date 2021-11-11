@@ -2,6 +2,7 @@
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using System.Collections.Generic;
 
 namespace Sokoban
 {
@@ -13,6 +14,7 @@ namespace Sokoban
 
         private GraphicsDeviceManager graphicsPlayer;
 
+        private List<Player> animationList;
 
         private float timeBetweenMovement = .3f;
         private float movementClock = 0;
@@ -38,21 +40,38 @@ namespace Sokoban
 
         public override void LoadContent(ContentManager content)
         {
-
+            //W
             animations = new Texture2D[3];
-            //animations = new Texture2D[24];
-            //animations = new Texture2D[24];
+            //D
+            animationsD = new Texture2D[3];
+            //A
+            animationsA = new Texture2D[3];
+            //S
+            animationsS = new Texture2D[3];
 
+
+            //W
+
+            if (true)
+            {
             for (int i = 2; i <= 4; i++)
             {
                 animations[i - 2] = content.Load<Texture2D>("player_0" + i);
             }
+            }
+
+
+
 
 
             //animations[0] = content.Load<Texture2D>("player_01");
 
 
-            sprite = animations[0];
+
+sprite = animations[0];
+            
+
+            
 
             rectangle = new Rectangle(0, 0, sprite.Width, sprite.Height);
         }

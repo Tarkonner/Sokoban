@@ -25,6 +25,9 @@ namespace Sokoban
         /// animations
         /// </summary>
         protected Texture2D[] animations;
+        protected Texture2D[] animationsD;
+        protected Texture2D[] animationsS;
+        protected Texture2D[] animationsA;
         protected float animationSpeed;
         private float timeEapsed;
         private int currenIndex;
