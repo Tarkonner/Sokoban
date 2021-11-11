@@ -36,12 +36,14 @@ namespace Sokoban
 
             gameObject.Add(new Box(new Vector2(1,3)));
 
-            gameObject.Add(new Player(new Vector2(3,1), graphics));
+            gameObject.Add(new Player(new Vector2(2,2), graphics));
 
 
-            foreach (var item in gameObject)
+            foreach (GameObjectWithCollider item in gameObject)
             {
                 item.LoadContent(Content);
+                //Test
+                LookAround.rectangles.Add(item);
             }
 
 
@@ -66,6 +68,7 @@ namespace Sokoban
                     }
                 }
             }
+
             base.Update(gameTime);
         }
 

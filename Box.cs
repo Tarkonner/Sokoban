@@ -18,25 +18,14 @@ namespace Sokoban
 
             this.position = GridPlacement.Placement(gridPosition);
 
-
         }
+
         public override void LoadContent(ContentManager content)
         {
-            sprite = content.Load<Texture2D>("crate_01");
+            sprite = content.Load<Texture2D>("crate_01");            
 
-            
-
-            rectangle = new Rectangle(0, 0, sprite.Width, sprite.Height);
-       
+            rectangle = new Rectangle((int)position.X, (int)position.Y, sprite.Width, sprite.Height);       
         }
-
-
-        public override void Draw(SpriteBatch spriteBatch)
-        {
-            spriteBatch.Draw(sprite, position, rectangle, Color.White, rotaton, Origen, scale, effect, layerDepth);
-        }
-
-
 
         public override void Update(GameTime gameTime)
         {

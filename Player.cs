@@ -12,7 +12,7 @@ namespace Sokoban
         private Vector2 gridPosition;
 
         private GraphicsDeviceManager graphicsPlayer;
-
+        private bool placeTaken = false;
 
         private float timeBetweenMovement = .3f;
         private float movementClock = 0;
@@ -29,12 +29,6 @@ namespace Sokoban
             animationSpeed = 2;
         }
 
-
-
-        public override void Draw(SpriteBatch spriteBatch)
-        {
-            spriteBatch.Draw(sprite, position, rectangle, Color.White, rotaton, Origen, scale, effect, layerDepth);
-        }
 
         public override void LoadContent(ContentManager content)
         {
@@ -54,7 +48,7 @@ namespace Sokoban
 
             sprite = animations[0];
 
-            rectangle = new Rectangle(0, 0, sprite.Width, sprite.Height);
+            rectangle = new Rectangle((int)position.X, (int)position.Y, sprite.Width, sprite.Height);
         }
 
 
@@ -85,11 +79,11 @@ namespace Sokoban
                 playerInput = new Vector2(0, 1);
             }
 
+            placeTaken = LookAround.LookAt(GridPlacement.Placement(gridPosition + playerInput));
 
             //Movement
-            if (movementClock <= 0 && playerInput != Vector2.Zero)
+            if (movementClock <= 0 && playerInput != Vector2.Zero && !placeTaken)
             {
-
                 //Bounds
                 if(gridPosition.X + playerInput.X >= 0
                     && gridPosition.X + playerInput.X < maxX 
@@ -102,19 +96,16 @@ namespace Sokoban
                     gridPosition += playerInput;
 
                     position = GridPlacement.Placement(gridPosition);
+                    rectangle.X = (int)position.X;
+                    rectangle.Y = (int)position.Y;
                 }
-
-
             }
-
         }
 
         public override void Update(GameTime gameTime)
         {
-       Animate(gameTime);
+            Animate(gameTime);
             Movement(gameTime);
-     
-            //Move(gameTime);
         }
 
         public override void OnCollision(GameObject other)

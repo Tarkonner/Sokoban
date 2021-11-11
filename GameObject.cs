@@ -15,7 +15,7 @@ namespace Sokoban
         // rendering
         public float layerDepth;
         protected SpriteEffects effect;
-        protected Rectangle rectangle;
+        public Rectangle rectangle;
 
         // sprite
         protected Texture2D sprite;
@@ -44,12 +44,15 @@ namespace Sokoban
         }
         public Texture2D Sprite { get => sprite; set => sprite = value; }
 
+
         public abstract void Update(GameTime gameTime);
 
         public abstract void LoadContent(ContentManager content);
 
-
-        public abstract void Draw(SpriteBatch spriteBatch);
+        public virtual void Draw(SpriteBatch spriteBatch)
+        {
+            spriteBatch.Draw(sprite, rectangle, null, Color.White, rotaton, Origen, effect, layerDepth);
+        }
 
         public void Animate(GameTime gameTime)
         {
