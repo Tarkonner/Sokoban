@@ -26,7 +26,7 @@ namespace Sokoban
 
             this.graphicsPlayer = graphics;
 
-            
+            animationSpeed = 2;
         }
 
 
@@ -43,7 +43,7 @@ namespace Sokoban
             //animations = new Texture2D[24];
             //animations = new Texture2D[24];
 
-            for (int i = 2; i < 4; i++)
+            for (int i = 2; i <= 4; i++)
             {
                 animations[i - 2] = content.Load<Texture2D>("player_0" + i);
             }
