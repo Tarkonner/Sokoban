@@ -27,7 +27,6 @@ namespace Sokoban
         protected Texture2D[] animations;
         protected float animationSpeed;
         private float timeEapsed;
-        private float fps = 0;
         private int currenIndex;
 
 
@@ -56,7 +55,7 @@ namespace Sokoban
         {
             timeEapsed += (float)gameTime.ElapsedGameTime.TotalSeconds;
 
-            currenIndex = (int)(timeEapsed * fps);
+            currenIndex = (int)(timeEapsed * animationSpeed);
 
             sprite = animations[currenIndex];
 

@@ -25,6 +25,8 @@ namespace Sokoban
             this.position = GridPlacement.Placement(gridPosition);
 
             this.graphicsPlayer = graphics;
+
+            animationSpeed = 8;
         }
 
 
@@ -37,18 +39,20 @@ namespace Sokoban
         public override void LoadContent(ContentManager content)
         {
 
-            animations = new Texture2D[24];
+            animations = new Texture2D[3];
+            //animations = new Texture2D[24];
+            //animations = new Texture2D[24];
 
-            for (int i = 1; i < animations.Length; i++)
+            for (int i = 2; i < 4; i++)
             {
-                animations[i] = content.Load<Texture2D>("player_0" + i);
+                animations[i - 2] = content.Load<Texture2D>("player_0" + i);
             }
 
 
             //animations[0] = content.Load<Texture2D>("player_01");
 
 
-            sprite = animations[1];
+            sprite = animations[0];
 
             rectangle = new Rectangle(0, 0, sprite.Width, sprite.Height);
         }
@@ -66,7 +70,7 @@ namespace Sokoban
             if (keyboard.IsKeyDown(Keys.D))
             {
                 playerInput = new Vector2(1, 0);
-
+                
             }
             else if (keyboard.IsKeyDown(Keys.A))
             {
@@ -107,8 +111,9 @@ namespace Sokoban
 
         public override void Update(GameTime gameTime)
         {
+       Animate(gameTime);
             Movement(gameTime);
-            Animate(gameTime);
+     
             //Move(gameTime);
         }
 
