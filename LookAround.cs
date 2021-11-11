@@ -9,11 +9,9 @@ namespace Sokoban
     {
         public static List<GameObjectWithCollider> rectangles = new List<GameObjectWithCollider>();
 
-        public static Tuple<bool, GameObjectWithCollider> LookAt(Vector2 position)
+        public static bool LookAt(Vector2 position)
         {
             bool result = false;
-            GameObjectWithCollider targetObject = null;
-
             Rectangle rec = new Rectangle((int)position.X, (int)position.Y, 1, 1);
 
             foreach (GameObjectWithCollider item in rectangles)
@@ -21,13 +19,10 @@ namespace Sokoban
                 result = rec.Intersects(item.rectangle);
 
                 if (result)
-                {
-                    targetObject = item;
                     break;
-                }
             }
 
-            return Tuple.Create(result, targetObject);
+            return result;
         }
     }
 }
