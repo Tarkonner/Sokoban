@@ -13,7 +13,7 @@ namespace Sokoban
 
         private GraphicsDeviceManager graphicsPlayer;
 
-        public KeyboardState keyboard = Keyboard.GetState();
+
 
         private float timeBetweenMovement = .3f;
         private float movementClock = 0;
@@ -27,7 +27,7 @@ namespace Sokoban
 
             this.graphicsPlayer = graphics;
 
-            animationSpeed = 2;
+            animationSpeed = 12;
         }
 
 
@@ -36,6 +36,8 @@ namespace Sokoban
         {
             spriteBatch.Draw(sprite, position, rectangle, Color.White, rotaton, Origen, scale, effect, layerDepth);
         }
+
+
 
         public override void LoadContent(ContentManager content)
         {
@@ -51,33 +53,28 @@ namespace Sokoban
 
 
 
-            //W
-
-                for (int i = 2; i <= 4; i++)
-                {
-                animations[i - 2] = content.Load<Texture2D>("player_0" + i);
-                }
-                sprite = animations[0];
-            
-
-            
-
-
-
-
-            if (animations == null)
+            //D
+            for (int i = 11; i <= 13; i++)
             {
-                animationsElse = content.Load<Texture2D>("player_0" + 1);
-                sprite = animationsElse;
+
+                animationsD[i - 1] = content.Load<Texture2D>("player_" + i);
+
+
+
+            }
+            //W
+            for (int i = 2; i <= 4; i++)
+            {
+      animations[i - 2] = content.Load<Texture2D>("player_0" + i);
+                    
+              
+
+
             }
 
+            sprite = animations[0];
 
-
-
-
-
-
-
+            sprite = animationsD[0];
 
 
 
@@ -98,7 +95,7 @@ namespace Sokoban
         {
             playerInput = Vector2.Zero;
 
-
+            KeyboardState keyboard = Keyboard.GetState();
             float de = (float)gameTime.ElapsedGameTime.TotalSeconds;
             movementClock -= de;
 
@@ -114,12 +111,20 @@ namespace Sokoban
             }
             else if (keyboard.IsKeyDown(Keys.W))
             {
+
                 playerInput = new Vector2(0, -1);
                 trueAnimationsW = true;
+
             }
             else if (keyboard.IsKeyDown(Keys.S))
             {
                 playerInput = new Vector2(0, 1);
+            }
+
+
+            if (keyboard.IsKeyUp(Keys.W))
+            {
+                trueAnimationsW = false;
             }
 
 
@@ -148,7 +153,13 @@ namespace Sokoban
 
         public override void Update(GameTime gameTime)
         {
-            Animate(gameTime);
+            if (trueAnimationsW == true)
+            {
+                Animate(gameTime);
+                
+            }
+
+            AnimateD(gameTime);
             Movement(gameTime);
 
             //Move(gameTime);
