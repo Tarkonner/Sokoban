@@ -39,16 +39,16 @@ namespace Sokoban
 
             animations = new Texture2D[24];
 
-            //for (int i = 1; i < animations.Length; i++)
-            //{
-            //    animations[i] = content.Load<Texture2D>("player_0" + i);
-            //}
+            for (int i = 1; i < animations.Length; i++)
+            {
+                animations[i] = content.Load<Texture2D>("player_0" + i);
+            }
 
 
-            animations[0] = content.Load<Texture2D>("player_01");
+            //animations[0] = content.Load<Texture2D>("player_01");
 
 
-            sprite = animations[0];
+            sprite = animations[1];
 
             rectangle = new Rectangle(0, 0, sprite.Width, sprite.Height);
         }
@@ -108,6 +108,7 @@ namespace Sokoban
         public override void Update(GameTime gameTime)
         {
             Movement(gameTime);
+            Animate(gameTime);
             //Move(gameTime);
         }
 
