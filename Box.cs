@@ -31,5 +31,24 @@ namespace Sokoban
         {
            
         }
+
+        public bool MoveInDirection(Vector2 direction)
+        {
+            GameObjectWithCollider targetObject = LookAround.LookAt(GridPlacement.Placement(gridPosition + direction));
+
+            if(targetObject == null)
+            {
+                //Move           
+                gridPosition += direction;
+                position = GridPlacement.Placement(gridPosition);
+                //Set rectangle position
+                rectangle.X = (int)position.X;
+                rectangle.Y = (int)position.Y;
+
+                return true;
+            }
+
+            return false;
+        }
     }
 }

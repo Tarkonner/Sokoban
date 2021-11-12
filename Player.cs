@@ -91,7 +91,7 @@ namespace Sokoban
         }
 
 
-        private void Movement(GameTime gameTime)
+        private void Input(GameTime gameTime)
         {
             playerInput = Vector2.Zero;
             KeyboardState keyboard = Keyboard.GetState();
@@ -128,34 +128,57 @@ namespace Sokoban
             }
 
 
-            var placeTaken = LookAround.LookAt(GridPlacement.Placement(gridPosition + playerInput));
+            
 
 
             //Movement
-            if (movementClock <= 0 && playerInput != Vector2.Zero && !placeTaken.Item1)
+            if (movementClock <= 0 && playerInput != Vector2.Zero)
             {
-                //Bounds
-                if (gridPosition.X + playerInput.X >= 0
-                    && gridPosition.X + playerInput.X < maxX
-                    && gridPosition.Y + playerInput.Y >= 0
-                    && gridPosition.Y + playerInput.Y < maxY
-                    )
-                {
-                    movementClock = timeBetweenMovement;
-
-                    gridPosition += playerInput;
-
-                    position = GridPlacement.Placement(gridPosition);
-                    rectangle.X = (int)position.X;
-                    rectangle.Y = (int)position.Y;
-                }
+                Movement(playerInput);
+                movementClock = timeBetweenMovement;
             }
         }
 
         public override void Update(GameTime gameTime)
         {
             Animate(gameTime);
-            Movement(gameTime);
+            Input(gameTime);
+        }
+
+        private void Movement(Vector2 direction)
+        {
+            //Bounds
+            if (gridPosition.X + direction.X <= 0
+                && gridPosition.X + direction.X > maxX
+                && gridPosition.Y + direction.Y <= 0
+                && gridPosition.Y + direction.Y > maxY)
+                return;
+                
+            //Look
+            GameObjectWithCollider targetObject = LookAround.LookAt(GridPlacement.Placement(gridPosition + playerInput));
+
+            if(targetObject == null)
+                MoveInDirection(direction);
+            else if (targetObject is Box)
+            {
+                Box targetBox = (Box)targetObject;
+                bool result = targetBox.MoveInDirection(direction);
+
+                if (result)
+                    MoveInDirection(direction);
+            }
+
+
+        }
+
+        private void MoveInDirection(Vector2 direction)
+        {
+            //Move           
+            gridPosition += direction;
+            position = GridPlacement.Placement(gridPosition);
+            //Set rectangle position
+            rectangle.X = (int)position.X;
+            rectangle.Y = (int)position.Y;
         }
 
         public override void OnCollision(GameObject other)
