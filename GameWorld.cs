@@ -5,6 +5,8 @@ using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Media;
 using System.Collections.Generic;
 
+
+
 namespace Sokoban
 {
     public class GameWorld : Game
@@ -15,7 +17,7 @@ namespace Sokoban
         List<GameObject> gameObject = new List<GameObject>();
 
         Texture2D collisionTexture;
-        private SoundEffect bacgroundMusic;
+        private Song bacgroundMusic;
 
 
         public GameWorld()
@@ -53,9 +55,9 @@ namespace Sokoban
 
 
 
-            //bacgroundMusic = Content.Load<SoundEffect>("592142__djgriffin__games");
-            //SoundEffect.Play(bacgroundMusic);
-            //SoundEffect. = true;
+            //bacgroundMusic = Content.Load<Song>("592142");
+            //MediaPlayer.Play(bacgroundMusic);
+            //MediaPlayer.IsRepeating = true;
 
         }
 

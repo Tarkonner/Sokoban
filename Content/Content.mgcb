@@ -19,11 +19,11 @@
 /processorParam:Quality=Best
 /build:326543__sqeeeek__wetfootsteps.wav
 
-#begin 592142__djgriffin__games.wav
-/importer:WavImporter
-/processor:SoundEffectProcessor
+#begin 592142.mp3
+/importer:Mp3Importer
+/processor:SongProcessor
 /processorParam:Quality=Best
-/build:592142__djgriffin__games.wav
+/build:592142.mp3
 
 #begin block_01.png
 /importer:TextureImporter
