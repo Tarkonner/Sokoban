@@ -46,7 +46,7 @@ namespace Sokoban
             gameObject.Add(new Box(2, 2));
             gameObject.Add(new Box(4, 4));
             gameObject.Add(new Player(3, 3));
-            gameObject.Add(new Goal(6, 6, true));
+            gameObject.Add(new Goal(6, 6));
 
             //Load item
             foreach (GameObject item in gameObject)
@@ -58,7 +58,7 @@ namespace Sokoban
                     collisionList.Add((GameObjectWithCollider)item);
             }
 
-            //Upload collision list
+            //Upload collision list to LookAround
             LookAround.objects = collisionList;
         }
 

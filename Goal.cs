@@ -12,7 +12,7 @@ namespace Sokoban
         private bool boxOnGoal = false;
         public bool BoxOnGoal { get => boxOnGoal; set => boxOnGoal = value; }
 
-        public Goal(float xPosition, float yPosition, bool isTriggerCollider = false) : base(xPosition, yPosition, isTriggerCollider)
+        public Goal(float xPosition, float yPosition, bool isTriggerCollider = true) : base(xPosition, yPosition, isTriggerCollider)
         {
         }
 
