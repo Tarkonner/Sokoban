@@ -19,11 +19,11 @@ namespace Sokoban
 
         //Animation
 
-        protected Texture2D[] animationsW;
-        protected Texture2D[] animationsA;
-        protected Texture2D[] animationsS;
-        protected Texture2D[] animationsD;
-        protected Texture2D[] animationsx;
+        protected Texture2D[] animationsUp;
+        protected Texture2D[] animationsLeft;
+        protected Texture2D[] animationsDown;
+        protected Texture2D[] animationsRight;
+        protected Texture2D[] animationsIdle;
 
         public Player(Vector2 position, GraphicsDeviceManager graphics)
         {
@@ -39,41 +39,41 @@ namespace Sokoban
         public override void LoadContent(ContentManager content)
         {
             //Load animations
-            animationsW = new Texture2D[3];
-            animationsx = new Texture2D[2];
-            animationsA = new Texture2D[3];
-            animationsS = new Texture2D[2];
-            animationsD = new Texture2D[3];
-            // W animaton
+            animationsUp = new Texture2D[3];
+            animationsIdle = new Texture2D[2];
+            animationsLeft = new Texture2D[3];
+            animationsDown = new Texture2D[2];
+            animationsRight = new Texture2D[3];
+            // Up animaton
             for (int i = 2; i <= 4; i++)
             {
-                animationsW[i - 2] = content.Load<Texture2D>("player_0" + i);
+                animationsUp[i - 2] = content.Load<Texture2D>("player_0" + i);
             }
             // D animaton
             for (int i = 11; i <= 13; i++)
             {
-                animationsD[i - 11] = content.Load<Texture2D>("player_" + i);
+                animationsRight[i - 11] = content.Load<Texture2D>("player_" + i);
             }
-            // A animaton
+            // Left animaton
             for (int i = 14; i <= 16; i++)
             {
-                animationsA[i - 14] = content.Load<Texture2D>("player_" + i);
+                animationsLeft[i - 14] = content.Load<Texture2D>("player_" + i);
             }
-            // S animaton
+            // Down animaton
             for (int i = 23; i <= 24; i++)
             {
-                animationsS[i - 23] = content.Load<Texture2D>("player_" + i);
+                animationsDown[i - 23] = content.Load<Texture2D>("player_" + i);
 
             }
             // start
             for (int i = 1; i <= 2; i++)
             {
-                animationsx[i - 1] = content.Load<Texture2D>("player_0" + i);
+                animationsIdle[i - 1] = content.Load<Texture2D>("player_0" + i);
 
             }
 
             // Idle animation
-            animations = animationsx;
+            animations = animationsIdle;
 
             // setter sprite
             sprite = animations[0];
@@ -96,27 +96,27 @@ namespace Sokoban
             if (keyboard.IsKeyDown(Keys.D))
             {
                 playerInput = new Vector2(1, 0);
-                animations = animationsD;
+                animations = animationsRight;
 
             }
             else if (keyboard.IsKeyDown(Keys.A))
             {
 
                 playerInput = new Vector2(-1, 0);
-                animations = animationsA;
+                animations = animationsLeft;
 
             }
             else if (keyboard.IsKeyDown(Keys.W))
             {
                 playerInput = new Vector2(0, -1);
 
-                animations = animationsW;
+                animations = animationsUp;
 
             }
             else if (keyboard.IsKeyDown(Keys.S))
             {
                 playerInput = new Vector2(0, 1);
-                animations = animationsS;
+                animations = animationsDown;
 
             }
 
