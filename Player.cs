@@ -14,11 +14,7 @@ namespace Sokoban
         public Vector2 playerInput = Vector2.Zero;
         private float timeBetweenMovement = .3f;
         private float movementClock = 0;
-        private int maxX = 12;
-        private int maxY = 8;
-
         //Animation
-
         protected Texture2D[] animationsUp;
         protected Texture2D[] animationsLeft;
         protected Texture2D[] animationsDown;
@@ -27,24 +23,10 @@ namespace Sokoban
         private SoundEffect walkSound;
         private SoundEffectInstance soundEffectInstance;
 
-
-        public Player(Vector2 position, bool isTriggerCollider = false) : base(position, isTriggerCollider)
+        public Player(float xPosition, float yPosition, bool isTriggerCollider = false) : base(xPosition, yPosition, isTriggerCollider)
         {
             animationSpeed = 2;
         }
-
-        /*
-        public Player(Vector2 position, GraphicsDeviceManager graphics)
-        {
-            gridPosition = position;
-            this.position = GridPlacement.Placement(gridPosition);
-
-            this.graphicsPlayer = graphics;
-
-            animationSpeed = 1.5f;
-        }
-        */
-
 
         public override void LoadContent(ContentManager content)
         {
@@ -73,14 +55,12 @@ namespace Sokoban
             for (int i = 23; i <= 24; i++)
             {
                 animationsDown[i - 23] = content.Load<Texture2D>("player_" + i);
-
             }
 
             // start
             for (int i = 1; i <= 2; i++)
             {
                 animationsIdle[i - 1] = content.Load<Texture2D>("player_0" + i);
-
             }
 
             // Idle animation
@@ -121,45 +101,32 @@ namespace Sokoban
             //Input
             if (keyboard.IsKeyDown(Keys.D))
             {
-
                 playerInput = new Vector2(1, 0);
                 animations = animationsRight;
-
-                soundEffectInstance.Play();
+                
             }
             else if (keyboard.IsKeyDown(Keys.A))
             {
-
                 playerInput = new Vector2(-1, 0);
                 animations = animationsLeft;
-
             }
             else if (keyboard.IsKeyDown(Keys.W))
             {
                 playerInput = new Vector2(0, -1);
-
                 animations = animationsUp;
-
             }
             else if (keyboard.IsKeyDown(Keys.S))
             {
                 playerInput = new Vector2(0, 1);
                 animations = animationsDown;
-
             }
-
-            if (keyboard.IsKeyUp(Keys.D))
-            {
-                soundEffectInstance.Stop();
-            }
-
-
 
             //Movement
             if (movementClock <= 0 && playerInput != Vector2.Zero)
             {
                 Movement(playerInput);
                 movementClock = timeBetweenMovement;
+                soundEffectInstance.Play();
             }
         }
 
@@ -167,21 +134,10 @@ namespace Sokoban
         {
             Animate(gameTime);
             Input(gameTime);
-
-
-
-
         }
 
         private void Movement(Vector2 direction)
         {
-            //Bounds
-            if (gridPosition.X + direction.X <= 0
-                && gridPosition.X + direction.X > maxX
-                && gridPosition.Y + direction.Y <= 0
-                && gridPosition.Y + direction.Y > maxY)
-                return;
-
             //Look
             GameObjectWithCollider targetObject = LookAround.LookAt(GridPlacement.Placement(gridPosition + playerInput));
 

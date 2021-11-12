@@ -7,7 +7,7 @@ namespace Sokoban
 {
     public abstract class GameObjectWithMovement : GameObjectWithCollider
     {
-        protected GameObjectWithMovement(Vector2 position, bool isTriggerCollider) : base(position, isTriggerCollider)
+        protected GameObjectWithMovement(float xPosition, float yPosition, bool isTriggerCollider = false) : base(xPosition, yPosition, isTriggerCollider)
         {
         }
 

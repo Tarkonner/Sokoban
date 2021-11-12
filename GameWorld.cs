@@ -14,8 +14,11 @@ namespace Sokoban
         private GraphicsDeviceManager graphics;
         private SpriteBatch spriteBatch;
 
-        List<GameObject> gameObject = new List<GameObject>();
 
+        List<GameObject> gameObject = new List<GameObject>();
+        List<GameObjectWithCollider> collisionList = new List<GameObjectWithCollider>();
+
+        //Debug
         Texture2D collisionTexture;
 
 
@@ -39,26 +42,24 @@ namespace Sokoban
 
             collisionTexture = Content.Load<Texture2D>("CollisionTexture");
 
-            gameObject.Add(new Box(new Vector2(1, 3)));
-            gameObject.Add(new Box(new Vector2(4, 4)));
+            //Setup sceen
+            gameObject.Add(new Box(2, 2));
+            gameObject.Add(new Box(4, 4));
+            gameObject.Add(new Player(3, 3));
+            gameObject.Add(new Goal(6, 6, true));
 
-            gameObject.Add(new Player(new Vector2(2,2)));
-
-            gameObject.Add(new Goal(new Vector2(6,6), true));
-
-            foreach (GameObjectWithCollider item in gameObject)
+            //Load item
+            foreach (GameObject item in gameObject)
             {
                 item.LoadContent(Content);
-                //Test
-                LookAround.objects.Add(item);
+
+                //Get GameObjects with collision
+                if (item is GameObjectWithCollider)
+                    collisionList.Add((GameObjectWithCollider)item);
             }
 
-
-
-            //bacgroundMusic = Content.Load<Song>("592142");
-            //MediaPlayer.Play(bacgroundMusic);
-            //MediaPlayer.IsRepeating = true;
-
+            //Upload collision list
+            LookAround.objects = collisionList;
         }
 
         protected override void Update(GameTime gameTime)
@@ -66,18 +67,19 @@ namespace Sokoban
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
 
-            // TODO: Add your update logic here
-            foreach (GameObjectWithCollider item in gameObject)
+            //Update all gameobjects
+            foreach (GameObject item in gameObject)
             {
                 item.Update(gameTime);
+            }
 
-                //Collision
-                foreach (GameObjectWithCollider other in gameObject)
+            //Collision
+            foreach (GameObjectWithCollider item in collisionList)
+            {
+                foreach (GameObjectWithCollider other in collisionList)
                 {
-                    if(item != other && other is GameObjectWithCollider && item is GameObjectWithCollider)
-                    {
+                    if (item != other)
                         item.CheckCollision(other);
-                    }
                 }
             }
 

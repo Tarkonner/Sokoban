@@ -26,9 +26,10 @@ namespace Sokoban
         private float timeEapsed;
         private int currenIndex;
 
-        protected GameObject(Vector2 position)
+        protected GameObject(float xPosition, float yPosition)
         {
-            gridPosition = position;
+            gridPosition.X = xPosition;
+            gridPosition.Y = yPosition;
             this.position = GridPlacement.Placement(gridPosition);
         }
 

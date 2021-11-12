@@ -7,14 +7,15 @@ namespace Sokoban
 {
     public abstract class GameObjectWithCollider : GameObject
     {
+        public bool Trigger { get => trigger; set => trigger = value; }
         protected bool trigger;
 
-        public bool Trigger { get => trigger; set => trigger = value; }
-
-        protected GameObjectWithCollider(Vector2 position, bool isTriggerCollider = false) : base(position)
+        protected GameObjectWithCollider(float xPosition, float yPosition, bool isTriggerCollider = false) : base(xPosition, yPosition)
         {
             trigger = isTriggerCollider;
         }
+
+
 
         public virtual Rectangle GetCollisionBox(float sizeX = 0, float sizeY = 0)
         {

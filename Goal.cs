@@ -10,12 +10,14 @@ namespace Sokoban
     class Goal : GameObjectWithCollider
     {
         private bool boxOnGoal = false;
-
         public bool BoxOnGoal { get => boxOnGoal; set => boxOnGoal = value; }
 
-        public Goal(Vector2 position, bool isTriggerCollider = true) : base(position, isTriggerCollider)
+        public Goal(float xPosition, float yPosition, bool isTriggerCollider = false) : base(xPosition, yPosition, isTriggerCollider)
         {
         }
+
+
+
 
         public override void LoadContent(ContentManager content)
         {

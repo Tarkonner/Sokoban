@@ -9,7 +9,7 @@ namespace Sokoban
 {
    public class Box : GameObjectWithMovement
     {
-        public Box(Vector2 position, bool isTriggerCollider = false) : base(position, isTriggerCollider)
+        public Box(float xPosition, float yPosition, bool isTriggerCollider = false) : base(xPosition, yPosition, isTriggerCollider)
         {
         }
 
