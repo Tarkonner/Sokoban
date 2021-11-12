@@ -13,11 +13,17 @@
 
 #---------------------------------- Content ---------------------------------#
 
-#begin ../../../../Downloads/326543__sqeeeek__wetfootsteps.wav
+#begin 326543__sqeeeek__wetfootsteps.wav
 /importer:WavImporter
 /processor:SoundEffectProcessor
 /processorParam:Quality=Best
-/build:../../../../Downloads/326543__sqeeeek__wetfootsteps.wav;326543__sqeeeek__wetfootsteps.wav
+/build:326543__sqeeeek__wetfootsteps.wav
+
+#begin 592142__djgriffin__games.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:592142__djgriffin__games.wav
 
 #begin block_01.png
 /importer:TextureImporter
