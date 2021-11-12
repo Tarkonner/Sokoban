@@ -32,7 +32,7 @@ namespace Sokoban
 
             this.graphicsPlayer = graphics;
 
-            animationSpeed = 2;
+            animationSpeed = 3;
         }
 
 
@@ -44,32 +44,38 @@ namespace Sokoban
             animationsA = new Texture2D[3];
             animationsS = new Texture2D[2];
             animationsD = new Texture2D[3];
-
+            // W animaton
             for (int i = 2; i <= 4; i++)
             {
                 animationsW[i - 2] = content.Load<Texture2D>("player_0" + i);
             }
+            // D animaton
             for (int i = 11; i <= 13; i++)
             {
                 animationsD[i - 11] = content.Load<Texture2D>("player_" + i);
             }
+            // A animaton
             for (int i = 14; i <= 16; i++)
             {
                 animationsA[i - 14] = content.Load<Texture2D>("player_" + i);
             }
+            // S animaton
             for (int i = 23; i <= 24; i++)
             {
                 animationsS[i - 23] = content.Load<Texture2D>("player_" + i);
 
             }
+            // start
             for (int i = 1; i <= 2; i++)
             {
                 animationsx[i - 1] = content.Load<Texture2D>("player_0" + i);
 
             }
 
-           // Idle animation
+            // Idle animation
             animations = animationsx;
+
+            // setter sprite
             sprite = animations[0];
 
 
