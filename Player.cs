@@ -126,6 +126,7 @@ namespace Sokoban
             {
                 Movement(playerInput);
                 movementClock = timeBetweenMovement;
+                soundEffectInstance.Stop();
                 soundEffectInstance.Play();
             }
         }
