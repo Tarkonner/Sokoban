@@ -6,13 +6,12 @@ using Microsoft.Xna.Framework.Input;
 
 namespace Sokoban
 {
-    public class Player : GameObjectWithCollider
+    public class Player : GameObjectWithMovement
     {
         private GraphicsDeviceManager graphicsPlayer;
 
         //Movement
-        public Vector2 playerInput = Vector2.Zero;
-        private Vector2 gridPosition;
+        public Vector2 playerInput = Vector2.Zero;        
         private float timeBetweenMovement = .3f;
         private float movementClock = 0;
         private int maxX = 12;
@@ -27,6 +26,12 @@ namespace Sokoban
         protected Texture2D[] animationsIdle;
         private SoundEffect walkSound;
 
+        public Player(Vector2 position, bool isTriggerCollider = false) : base(position, isTriggerCollider)
+        {
+            animationSpeed = 2;
+        }
+
+        /*
         public Player(Vector2 position, GraphicsDeviceManager graphics)
         {
             gridPosition = position;
@@ -34,8 +39,9 @@ namespace Sokoban
 
             this.graphicsPlayer = graphics;
 
-            animationSpeed = .5f;
+            animationSpeed = 1.5f;
         }
+        */
 
 
         public override void LoadContent(ContentManager content)
@@ -162,23 +168,11 @@ namespace Sokoban
             else if (targetObject is Box)
             {
                 Box targetBox = (Box)targetObject;
-                bool result = targetBox.MoveInDirection(direction);
+                bool result = targetBox.BoxMovement(direction);
 
                 if (result)
                     MoveInDirection(direction);
             }
-
-
-        }
-
-        private void MoveInDirection(Vector2 direction)
-        {
-            //Move           
-            gridPosition += direction;
-            position = GridPlacement.Placement(gridPosition);
-            //Set rectangle position
-            rectangle.X = (int)position.X;
-            rectangle.Y = (int)position.Y;
         }
 
         public override void OnCollision(GameObject other)

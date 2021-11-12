@@ -7,9 +7,11 @@ namespace Sokoban
 {
     public abstract class GameObjectWithCollider : GameObject
     {
-        private bool trigger;
+        protected bool trigger;
 
-        public GameObjectWithCollider(bool isTriggerCollider = false)
+        public bool Trigger { get => trigger; set => trigger = value; }
+
+        protected GameObjectWithCollider(Vector2 position, bool isTriggerCollider = false) : base(position)
         {
             trigger = isTriggerCollider;
         }
@@ -34,10 +36,11 @@ namespace Sokoban
         {
             if (other != this)
             {
+                if (other.trigger)
+                    return;
+
                 if (GetCollisionBox().Intersects(other.GetCollisionBox()))
-                {
                     OnCollision(other);
-                }
             }
         }
     }

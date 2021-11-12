@@ -7,17 +7,10 @@ using System.Text;
 
 namespace Sokoban
 {
-   public class Box : GameObjectWithCollider
+   public class Box : GameObjectWithMovement
     {
-
-        private Vector2 gridPosition;
-
-        public Box(Vector2 position)
+        public Box(Vector2 position, bool isTriggerCollider = false) : base(position, isTriggerCollider)
         {
-            gridPosition = position;
-
-            this.position = GridPlacement.Placement(gridPosition);
-
         }
 
         public override void LoadContent(ContentManager content)
@@ -32,18 +25,13 @@ namespace Sokoban
            
         }
 
-        public bool MoveInDirection(Vector2 direction)
+        public bool BoxMovement(Vector2 direction)
         {
             GameObjectWithCollider targetObject = LookAround.LookAt(GridPlacement.Placement(gridPosition + direction));
 
             if(targetObject == null)
             {
-                //Move           
-                gridPosition += direction;
-                position = GridPlacement.Placement(gridPosition);
-                //Set rectangle position
-                rectangle.X = (int)position.X;
-                rectangle.Y = (int)position.Y;
+                MoveInDirection(direction);
 
                 return true;
             }

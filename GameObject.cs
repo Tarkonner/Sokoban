@@ -12,6 +12,7 @@ namespace Sokoban
         public Vector2 position;
         public float rotaton;
         public Vector2 scale = Vector2.One;
+        protected Vector2 gridPosition;
 
         //Rendering
         public float layerDepth;
@@ -25,7 +26,11 @@ namespace Sokoban
         private float timeEapsed;
         private int currenIndex;
 
-
+        protected GameObject(Vector2 position)
+        {
+            gridPosition = position;
+            this.position = GridPlacement.Placement(gridPosition);
+        }
 
         public Vector2 Origen
         {

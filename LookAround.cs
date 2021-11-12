@@ -18,6 +18,9 @@ namespace Sokoban
 
             foreach (GameObjectWithCollider item in objects)
             {
+                if (item.Trigger)
+                    continue;
+
                 bool colliding = rec.Intersects(item.rectangle);
 
                 if (colliding)
