@@ -77,7 +77,7 @@ namespace Sokoban
 
             soundEffectInstance = walkSound.CreateInstance();
             soundEffectInstance.IsLooped = false;
-
+            SoundEffect.MasterVolume = 0.3f;
 
 
             // Set some properties
