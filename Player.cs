@@ -11,7 +11,7 @@ namespace Sokoban
         private GraphicsDeviceManager graphicsPlayer;
 
         //Movement
-        public Vector2 playerInput = Vector2.Zero;        
+        public Vector2 playerInput = Vector2.Zero;
         private float timeBetweenMovement = .3f;
         private float movementClock = 0;
         private int maxX = 12;
@@ -25,6 +25,7 @@ namespace Sokoban
         protected Texture2D[] animationsRight;
         protected Texture2D[] animationsIdle;
         private SoundEffect walkSound;
+        private bool sound = false;
 
         public Player(Vector2 position, bool isTriggerCollider = false) : base(position, isTriggerCollider)
         {
@@ -73,7 +74,7 @@ namespace Sokoban
                 animationsDown[i - 23] = content.Load<Texture2D>("player_" + i);
 
             }
-            
+
             // start
             for (int i = 1; i <= 2; i++)
             {
@@ -83,14 +84,27 @@ namespace Sokoban
 
             // Idle animation
             animations = animationsIdle;
-            
-           
+
+
 
             // setter sprite
             sprite = animations[0];
 
             walkSound = content.Load<SoundEffect>("326543__sqeeeek__wetfootsteps");
-            SoundEffect.MasterVolume = .4f;
+
+
+
+            SoundEffectInstance instance = walkSound.CreateInstance();
+
+            // Set some properties
+            instance.Pitch = 1.0f;
+            instance.IsLooped = true;
+            if (sound == true)
+            {
+                instance.Play();
+                sound = false;
+            }
+
 
             //Rec
             rectangle = new Rectangle((int)position.X, (int)position.Y, sprite.Width, sprite.Height);
@@ -108,9 +122,10 @@ namespace Sokoban
             //Input
             if (keyboard.IsKeyDown(Keys.D))
             {
+sound = true;
                 playerInput = new Vector2(1, 0);
                 animations = animationsRight;
-                walkSound.Play();
+                
             }
             else if (keyboard.IsKeyDown(Keys.A))
             {
@@ -134,7 +149,7 @@ namespace Sokoban
             }
 
 
-            
+
 
 
             //Movement
@@ -159,11 +174,11 @@ namespace Sokoban
                 && gridPosition.Y + direction.Y <= 0
                 && gridPosition.Y + direction.Y > maxY)
                 return;
-                
+
             //Look
             GameObjectWithCollider targetObject = LookAround.LookAt(GridPlacement.Placement(gridPosition + playerInput));
 
-            if(targetObject == null)
+            if (targetObject == null)
                 MoveInDirection(direction);
             else if (targetObject is Box)
             {

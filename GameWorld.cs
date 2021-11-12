@@ -17,7 +17,6 @@ namespace Sokoban
         List<GameObject> gameObject = new List<GameObject>();
 
         Texture2D collisionTexture;
-        private Song bacgroundMusic;
 
 
         public GameWorld()
