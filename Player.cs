@@ -1,4 +1,5 @@
 ﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
@@ -24,6 +25,7 @@ namespace Sokoban
         protected Texture2D[] animationsDown;
         protected Texture2D[] animationsRight;
         protected Texture2D[] animationsIdle;
+        private SoundEffect walkSound;
 
         public Player(Vector2 position, GraphicsDeviceManager graphics)
         {
@@ -32,7 +34,7 @@ namespace Sokoban
 
             this.graphicsPlayer = graphics;
 
-            animationSpeed = 3;
+            animationSpeed = .5f;
         }
 
 
@@ -65,6 +67,7 @@ namespace Sokoban
                 animationsDown[i - 23] = content.Load<Texture2D>("player_" + i);
 
             }
+            
             // start
             for (int i = 1; i <= 2; i++)
             {
@@ -74,10 +77,14 @@ namespace Sokoban
 
             // Idle animation
             animations = animationsIdle;
+            
+           
 
             // setter sprite
             sprite = animations[0];
 
+            walkSound = content.Load<SoundEffect>("326543__sqeeeek__wetfootsteps");
+            SoundEffect.MasterVolume = .4f;
 
             //Rec
             rectangle = new Rectangle((int)position.X, (int)position.Y, sprite.Width, sprite.Height);
@@ -97,7 +104,7 @@ namespace Sokoban
             {
                 playerInput = new Vector2(1, 0);
                 animations = animationsRight;
-
+                walkSound.Play();
             }
             else if (keyboard.IsKeyDown(Keys.A))
             {

@@ -13,6 +13,12 @@
 
 #---------------------------------- Content ---------------------------------#
 
+#begin ../../../../Downloads/326543__sqeeeek__wetfootsteps.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:../../../../Downloads/326543__sqeeeek__wetfootsteps.wav;326543__sqeeeek__wetfootsteps.wav
+
 #begin block_01.png
 /importer:TextureImporter
 /processor:TextureProcessor

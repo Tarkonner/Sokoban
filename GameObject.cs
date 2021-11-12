@@ -56,14 +56,13 @@ namespace Sokoban
 
             currenIndex = (int)(timeEapsed * animationSpeed);
 
-            sprite = animations[currenIndex];
-
-            if (currenIndex >= animations.Length - 1)
+            if (currenIndex >= animations.Length)
             {
                 timeEapsed = 0;
 
                 currenIndex = 0;
             }
+            sprite = animations[currenIndex];
         }
     }
 }
