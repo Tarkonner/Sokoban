@@ -25,7 +25,8 @@ namespace Sokoban
         protected Texture2D[] animationsRight;
         protected Texture2D[] animationsIdle;
         private SoundEffect walkSound;
-        private bool sound = false;
+        private SoundEffectInstance soundEffectInstance;
+
 
         public Player(Vector2 position, bool isTriggerCollider = false) : base(position, isTriggerCollider)
         {
@@ -94,16 +95,14 @@ namespace Sokoban
 
 
 
-            SoundEffectInstance instance = walkSound.CreateInstance();
+            soundEffectInstance = walkSound.CreateInstance();
+            soundEffectInstance.IsLooped = false;
+
+
 
             // Set some properties
-            instance.Pitch = 1.0f;
-            instance.IsLooped = true;
-            if (sound == true)
-            {
-                instance.Play();
-                sound = false;
-            }
+
+
 
 
             //Rec
@@ -122,10 +121,11 @@ namespace Sokoban
             //Input
             if (keyboard.IsKeyDown(Keys.D))
             {
-sound = true;
+
                 playerInput = new Vector2(1, 0);
                 animations = animationsRight;
-                
+
+                soundEffectInstance.Play();
             }
             else if (keyboard.IsKeyDown(Keys.A))
             {
@@ -148,7 +148,10 @@ sound = true;
 
             }
 
-
+            if (keyboard.IsKeyUp(Keys.D))
+            {
+                soundEffectInstance.Stop();
+            }
 
 
 
@@ -164,6 +167,10 @@ sound = true;
         {
             Animate(gameTime);
             Input(gameTime);
+
+
+
+
         }
 
         private void Movement(Vector2 direction)
