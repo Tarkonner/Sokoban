@@ -18,7 +18,6 @@ namespace Sokoban
 
 
 
-
         public override void LoadContent(ContentManager content)
         {
             sprite = content.Load<Texture2D>("environment_03");
@@ -36,7 +35,9 @@ namespace Sokoban
         public override void OnCollision(GameObject other)
         {
             if (other is Box)
+            {
                 boxOnGoal = true;
+            }
         }
     }
 }

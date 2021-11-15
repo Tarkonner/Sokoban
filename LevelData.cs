@@ -6,7 +6,15 @@ namespace Sokoban
 {
     class LevelData
     {
-        public int[,] Level_0 = new int[7, 6]
+        /// <summary>
+        /// Dataen for levles
+        /// 0: gulv
+        /// 1: vægge
+        /// 2: boks
+        /// 3: mål
+        /// 4: spiller
+        /// </summary>
+        public int[,] level_0 = new int[7, 6]
         {
             {1, 1, 1, 1, 1, 1},
             {1, 0, 0, 0, 0, 1},
@@ -16,6 +24,24 @@ namespace Sokoban
             {1, 0, 0, 0, 0, 1},
             {1, 1, 1, 1, 1, 1}
         };
+        public int[,] level_1 = new int[7, 6]
+        {
+            {1, 1, 1, 1, 1, 1},
+            {1, 1, 0, 0, 0, 1},
+            {1, 1, 0, 3, 3, 1},
+            {1, 0, 2, 0, 0, 1},
+            {1, 4, 0, 0, 2, 1},
+            {1, 0, 0, 0, 0, 1},
+            {1, 1, 1, 1, 1, 1}
+        };
+
+        public List<int[,]> levelHolder = new List<int[,]>();
+
+        public LevelData()
+        {
+            levelHolder.Add(level_0);
+            levelHolder.Add(level_1);
+        }
 
         public GameObject Object(int whatObjects, float xPos, float yPos)
         {

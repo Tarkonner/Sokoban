@@ -14,12 +14,15 @@ namespace Sokoban
         private GraphicsDeviceManager graphics;
         private SpriteBatch spriteBatch;
 
+        private LevelData levels;
 
         List<GameObject> gameObject = new List<GameObject>();
         List<GameObjectWithCollider> collisionList = new List<GameObjectWithCollider>();
 
         //Debug
         Texture2D collisionTexture;
+
+        private float testClock = 5;
 
 
         public GameWorld()
@@ -45,37 +48,23 @@ namespace Sokoban
 #endif
         }
 
-
-
-
         protected override void LoadContent()
         {
             spriteBatch = new SpriteBatch(GraphicsDevice);
 
             collisionTexture = Content.Load<Texture2D>("CollisionTexture");
 
-            LevelData levelData = new LevelData();
+            //Load levels
+            levels = new LevelData();
+            //Uplow first level
+            LoadLevel(0);
 
-            for (int y = 0; y < levelData.Level_0.GetLength(1); y++)
-            {
-                for (int x = 0; x < levelData.Level_0.GetLength(0); x++)
-                {
-                    //Add floor if needed
-                    if (levelData.Level_0[x, y] == 2 
-                        || levelData.Level_0[x, y] == 3 
-                        || levelData.Level_0[x, y] == 4)
-                        gameObject.Add(levelData.Object(0, x, y));
-
-                    //Spawn object
-                    gameObject.Add(levelData.Object(levelData.Level_0[x, y], x, y));
-                }
-            }
 
             //Load item
             foreach (GameObject item in gameObject)
             {
                 item.LoadContent(Content);
-
+                
                 //Get GameObjects with collision
                 if (item is GameObjectWithCollider)
                     collisionList.Add((GameObjectWithCollider)item);
@@ -89,6 +78,7 @@ namespace Sokoban
         {
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
+
 
             //Update all gameobjects
             foreach (GameObject item in gameObject)
@@ -107,6 +97,13 @@ namespace Sokoban
             }
 
             base.Update(gameTime);
+
+            /*
+            float de = (float)gameTime.ElapsedGameTime.TotalSeconds;
+            testClock -= de;
+            if (testClock < 0)
+                LoadLevel(1);
+            */
         }
 
         protected override void Draw(GameTime gameTime)
@@ -115,17 +112,38 @@ namespace Sokoban
 
             // TODO: Add your drawing code here
             spriteBatch.Begin(SpriteSortMode.FrontToBack);
+
             foreach (var item in gameObject)
             {
                 item.Draw(spriteBatch);
-
-                if (item is GameObjectWithCollider)
-                    DrawCollisionBox((GameObjectWithCollider)item);
             }
             spriteBatch.End();
 
             base.Draw(gameTime);
         }
+
+
+        public void LoadLevel(int targetLevel)
+        {
+            //Remove old level
+            if (gameObject.Count > 0)
+                gameObject.Clear();
+
+            //Inscert level
+            for (int y = 0; y < levels.levelHolder[targetLevel].GetLength(1); y++)
+            {
+                for (int x = 0; x < levels.levelHolder[targetLevel].GetLength(0); x++)
+                {
+                    //Add floor if needed
+                    if (levels.levelHolder[targetLevel][x, y] > 1)
+                        gameObject.Add(levels.Object(0, x, y));
+
+                    //Spawn object
+                    gameObject.Add(levels.Object(levels.levelHolder[targetLevel][x, y], x, y));
+                }
+            }
+        }
+
 
         private void DrawCollisionBox(GameObjectWithCollider go)
         {

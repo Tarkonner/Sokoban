@@ -104,8 +104,7 @@ namespace Sokoban
             if (keyboard.IsKeyDown(Keys.D))
             {
                 playerInput = new Vector2(1, 0);
-                animations = animationsRight;
-                
+                animations = animationsRight;                
             }
             else if (keyboard.IsKeyDown(Keys.A))
             {
