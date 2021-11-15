@@ -29,8 +29,9 @@ namespace Sokoban
             IsMouseVisible = true;
             // klar til fullscreen
             //IsMouseVisible = false;
+#if (!DEBUG)
             graphics.IsFullScreen = true;
-            
+#endif  
         }
 
         protected override void Initialize()
@@ -39,7 +40,9 @@ namespace Sokoban
            
             base.Initialize();
 
+#if (!DEBUG)
             graphics.ApplyChanges();
+#endif
         }
 
 
@@ -51,22 +54,19 @@ namespace Sokoban
 
             collisionTexture = Content.Load<Texture2D>("CollisionTexture");
 
-            //Setup sceen
-            /*
-            gameObject.Add(new Box(2, 2));
-            gameObject.Add(new Box(4, 4));
-            gameObject.Add(new Player(3, 3));
-            gameObject.Add(new Goal(6, 6));
-            */
             LevelData levelData = new LevelData();
 
             for (int y = 0; y < levelData.Level_0.GetLength(1); y++)
             {
                 for (int x = 0; x < levelData.Level_0.GetLength(0); x++)
                 {
-                    if (levelData.Level_0[x, y] == 2 || levelData.Level_0[x, y] == 4)
+                    //Add floor if needed
+                    if (levelData.Level_0[x, y] == 2 
+                        || levelData.Level_0[x, y] == 3 
+                        || levelData.Level_0[x, y] == 4)
                         gameObject.Add(levelData.Object(0, x, y));
 
+                    //Spawn object
                     gameObject.Add(levelData.Object(levelData.Level_0[x, y], x, y));
                 }
             }
@@ -114,7 +114,7 @@ namespace Sokoban
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
             // TODO: Add your drawing code here
-            spriteBatch.Begin();
+            spriteBatch.Begin(SpriteSortMode.FrontToBack);
             foreach (var item in gameObject)
             {
                 item.Draw(spriteBatch);

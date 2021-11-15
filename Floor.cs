@@ -15,7 +15,7 @@ namespace Sokoban
 
         public override void LoadContent(ContentManager content)
         {
-            sprite = content.Load<Texture2D>("environment_05");
+            sprite = content.Load<Texture2D>("ground_06");
 
             rectangle = new Rectangle((int)position.X, (int)position.Y, sprite.Width, sprite.Height);
         }

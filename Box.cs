@@ -17,7 +17,9 @@ namespace Sokoban
         {
             sprite = content.Load<Texture2D>("crate_01");            
 
-            rectangle = new Rectangle((int)position.X, (int)position.Y, sprite.Width, sprite.Height);       
+            rectangle = new Rectangle((int)position.X, (int)position.Y, sprite.Width, sprite.Height);
+
+            layerDepth = 0.2f;
         }
 
         public override void Update(GameTime gameTime)

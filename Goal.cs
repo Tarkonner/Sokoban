@@ -24,6 +24,8 @@ namespace Sokoban
             sprite = content.Load<Texture2D>("environment_03");
 
             rectangle = new Rectangle((int)position.X, (int)position.Y, sprite.Width, sprite.Height);
+
+            layerDepth = .1f;
         }
 
         public override void Update(GameTime gameTime)

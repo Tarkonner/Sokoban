@@ -26,6 +26,8 @@ namespace Sokoban
         public Player(float xPosition, float yPosition, bool isTriggerCollider = false) : base(xPosition, yPosition, isTriggerCollider)
         {
             animationSpeed = 2;
+
+            layerDepth = 0.2f;
         }
 
         public override void LoadContent(ContentManager content)
