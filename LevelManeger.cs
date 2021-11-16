@@ -69,6 +69,8 @@ namespace Sokoban
                         objectManeger.Instantiate(Object(spawnLevel[x, y], x, y));
                     }
                 }
+
+                objectManeger.UpdateLoop();
             }
             catch (Exception e)
             {

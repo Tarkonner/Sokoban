@@ -58,7 +58,6 @@ namespace Sokoban
             levels = new LevelManeger();
             //Uplow first level
             levels.LoadLevel(0);
-            objectManeger.UpdateLoop();
 
             //Load item
             foreach (GameObject item in objectManeger.GameObjects)
@@ -80,7 +79,6 @@ namespace Sokoban
                 loadTestlevel = true;
 
                 levels.LoadLevel(1);
-                objectManeger.UpdateLoop();
             }
 #endif
 
