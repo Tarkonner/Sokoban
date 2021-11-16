@@ -66,6 +66,14 @@ namespace Sokoban
             removingGameObjects.Add(target);
         }
 
+        public void ClearSceen()
+        {
+            foreach (var item in gameObjects)
+            {
+                Destory(item);
+            }
+        }
+
         private void AddGameObjectToWorld()
         {
             if (addedGameObjects.Count > 0)

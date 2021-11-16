@@ -1,9 +1,11 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace Sokoban
 {
     class LevelData
     {
+        #region Levels
         /// <summary>
         /// Dataen for levles
         /// 0: gulv
@@ -87,7 +89,8 @@ namespace Sokoban
             {1, 0, 1, 0, 1, 3,1},
             {1, 1, 1, 1, 1, 1,1}
 };
-
+        #endregion
+        GameObjectManeger objectManeger = GameObjectManeger.Instance;
 
         public List<int[,]> levelHolder = new List<int[,]>();
 
@@ -117,6 +120,43 @@ namespace Sokoban
             }
 
             return null;
+        }
+
+        public void LoadLevel(int targetLevel)
+        {
+            int[,] spawnLevel = new int[0, 0];
+
+            try
+            {
+                spawnLevel = levelHolder[targetLevel];
+
+                //Remove old level
+                if (objectManeger.GameObjects.Count > 0)
+                {
+                    foreach (var item in objectManeger.GameObjects)
+                    {
+                        objectManeger.Destory(item);
+                    }
+                }
+
+                //Inscert level
+                for (int y = 0; y < spawnLevel.GetLength(1); y++)
+                {
+                    for (int x = 0; x < spawnLevel.GetLength(0); x++)
+                    {
+                        //Add floor if needed
+                        if (spawnLevel[x, y] > 1)
+                            objectManeger.Instantiate(Object(0, x, y));
+
+                        //Spawn object
+                        objectManeger.Instantiate(Object(spawnLevel[x, y], x, y));
+                    }
+                }
+            }
+            catch(Exception e)
+            {
+                
+            }
         }
     }
 }
