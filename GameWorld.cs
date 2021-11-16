@@ -16,7 +16,7 @@ namespace Sokoban
         private SpriteBatch spriteBatch;
 
         //Level
-        private LevelData levels;
+        private LevelManeger levels;
 
         //Gameobjcts
         private GameObjectManeger objectManeger = GameObjectManeger.Instance;
@@ -55,7 +55,7 @@ namespace Sokoban
             objectManeger.SetContentManeger(Content);
 
             //Load levels
-            levels = new LevelData();
+            levels = new LevelManeger();
             //Uplow first level
             levels.LoadLevel(0);
             objectManeger.UpdateLoop();
