@@ -34,7 +34,7 @@ namespace Sokoban
         {
             //Load animations
             animationsUp = new Texture2D[3];
-            animationsIdle = new Texture2D[2];
+            animationsIdle = new Texture2D[4];
             animationsLeft = new Texture2D[3];
             animationsDown = new Texture2D[2];
             animationsRight = new Texture2D[3];
@@ -60,9 +60,9 @@ namespace Sokoban
             }
 
             // start
-            for (int i = 1; i <= 2; i++)
+            for (int i = 23; i <= 26; i++)
             {
-                animationsIdle[i - 1] = content.Load<Texture2D>("player_0" + i);
+                animationsIdle[i - 23] = content.Load<Texture2D>("player_" + i);
             }
 
             // Idle animation
@@ -79,8 +79,12 @@ namespace Sokoban
 
             soundEffectInstance = walkSound.CreateInstance();
             soundEffectInstance.IsLooped = false;
+           
+            soundEffectInstance.Pitch = 0.1f;
+            soundEffectInstance.Pan = 0.1f;
             SoundEffect.MasterVolume = 0.3f;
 
+            
 
             // Set some properties
 
