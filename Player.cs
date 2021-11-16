@@ -30,33 +30,70 @@ namespace Sokoban
         }
 
         public override void LoadContent(ContentManager content)
-        {           
+        {
             //Load animations
-            animationsUp = new Texture2D[3];
+
             animationsIdle = new Texture2D[4];
-            animationsLeft = new Texture2D[3];
-            animationsDown = new Texture2D[2];
-            animationsRight = new Texture2D[3];
+            
+
+            
+            
+            Texture2D[] loadetAnimationsUp;
+            Texture2D[] loadetAnimationsRight;
+            Texture2D[] loadetAnimationsLeft;
+            Texture2D[] loadetAnimationsDown;
+            
             // Up animaton
+            animationsUp = new Texture2D[4];
+            loadetAnimationsUp = new Texture2D[3];
             for (int i = 2; i <= 4; i++)
             {
-                animationsUp[i - 2] = content.Load<Texture2D>("player_0" + i);
+                loadetAnimationsUp[i - 2] = content.Load<Texture2D>("player_0" + i);
             }
+            animationsUp[0] = loadetAnimationsUp[0];
+            animationsUp[1] = loadetAnimationsUp[1];
+            animationsUp[2] = loadetAnimationsUp[0];
+            animationsUp[3] = loadetAnimationsUp[2];
+
+
             // D animaton
+            animationsRight = new Texture2D[4];
+            loadetAnimationsRight = new Texture2D[3];
             for (int i = 11; i <= 13; i++)
             {
-                animationsRight[i - 11] = content.Load<Texture2D>("player_" + i);
+                loadetAnimationsRight[i - 11] = content.Load<Texture2D>("player_" + i);
             }
+            animationsRight[0] = loadetAnimationsRight[0];
+            animationsRight[1] = loadetAnimationsRight[1];
+            animationsRight[2] = loadetAnimationsRight[0];
+            animationsRight[3] = loadetAnimationsRight[2];
+
             // Left animaton
+            animationsLeft = new Texture2D[4];
+            loadetAnimationsLeft = new Texture2D[3];
             for (int i = 14; i <= 16; i++)
             {
-                animationsLeft[i - 14] = content.Load<Texture2D>("player_" + i);
+                loadetAnimationsLeft[i - 14] = content.Load<Texture2D>("player_" + i);
             }
+            animationsLeft[0] = loadetAnimationsLeft[0];
+            animationsLeft[1] = loadetAnimationsLeft[1];
+            animationsLeft[2] = loadetAnimationsLeft[0];
+            animationsLeft[3] = loadetAnimationsLeft[2];
+
+
             // Down animaton
-            for (int i = 23; i <= 24; i++)
+            animationsDown = new Texture2D[4];
+            loadetAnimationsDown = new Texture2D[4];
+            for (int i = 23; i <= 26; i++)
             {
-                animationsDown[i - 23] = content.Load<Texture2D>("player_" + i);
+                loadetAnimationsDown[i - 23] = content.Load<Texture2D>("player_" + i);
+
             }
+
+            animationsDown[0] = loadetAnimationsDown[0];
+            animationsDown[1] = loadetAnimationsDown[1];
+            animationsDown[2] = loadetAnimationsDown[0];
+            animationsDown[3] = loadetAnimationsDown[2];
 
             // start
             for (int i = 23; i <= 26; i++)
@@ -67,8 +104,6 @@ namespace Sokoban
             // Idle animation
             animations = animationsIdle;
 
-
-
             // setter sprite
             sprite = animations[0];
 
@@ -78,12 +113,12 @@ namespace Sokoban
 
             soundEffectInstance = walkSound.CreateInstance();
             soundEffectInstance.IsLooped = false;
-           
+
             soundEffectInstance.Pitch = 0.1f;
             soundEffectInstance.Pan = 0.1f;
             SoundEffect.MasterVolume = 0.3f;
 
-            
+
 
             // Set some properties
 
@@ -99,7 +134,7 @@ namespace Sokoban
         {
             keyboard = Keyboard.GetState();
             playerInput = Vector2.Zero;
-             
+
 
             float de = (float)gameTime.ElapsedGameTime.TotalSeconds;
             movementClock -= de;
@@ -108,7 +143,7 @@ namespace Sokoban
             if (keyboard.IsKeyDown(Keys.D))
             {
                 playerInput = new Vector2(1, 0);
-                animations = animationsRight;                
+                animations = animationsRight;
             }
             else if (keyboard.IsKeyDown(Keys.A))
             {
