@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Collections.Generic;
 
 namespace Sokoban
 {
@@ -14,15 +12,20 @@ namespace Sokoban
         /// 3: mål
         /// 4: spiller
         /// </summary>
-        public int[,] level_0 = new int[7, 6]
+        public int[,] level_0 = new int[12, 7]
         {
-            {1, 1, 1, 1, 1, 1},
-            {1, 0, 0, 0, 0, 1},
-            {1, 0, 2, 0, 0, 1},
-            {1, 0, 0, 4, 0, 1},
-            {1, 0, 3, 0, 0, 1},
-            {1, 0, 0, 0, 0, 1},
-            {1, 1, 1, 1, 1, 1}
+            {1, 1, 1, 1,1, 1 ,1},
+            {1, 4, 0, 0, 0, 0,1},
+            {1, 0, 2, 0, 0, 0,1},
+            {1, 0, 0, 0, 0, 0,1},
+            {1, 0, 0, 0, 0, 0,1},
+            {1, 0, 3, 0, 0, 0,1},
+            {1, 0, 0, 0, 0, 0,1},
+            {1, 0, 0, 0, 0, 0,1},
+            {1, 0, 0, 0, 0, 0,1},
+            {1, 0, 0, 0, 0, 0,1},
+            {1, 0, 0, 0, 0, 0,1},
+            {1, 1, 1, 1, 1, 1,1}
         };
         public int[,] level_1 = new int[7, 6]
         {
@@ -45,7 +48,7 @@ namespace Sokoban
 
         public GameObject Object(int whatObjects, float xPos, float yPos)
         {
-            switch(whatObjects)
+            switch (whatObjects)
             {
                 case 0:
                     return new Floor(xPos, yPos);

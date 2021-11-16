@@ -8,7 +8,7 @@ namespace Sokoban
 {
     public class Player : GameObjectWithMovement
     {
-        private GraphicsDeviceManager graphicsPlayer;
+      
 
         //Movement
         public Vector2 playerInput = Vector2.Zero;
