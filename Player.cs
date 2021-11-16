@@ -8,9 +8,8 @@ namespace Sokoban
 {
     public class Player : GameObjectWithMovement
     {
-      
-
         //Movement
+        private KeyboardState keyboard;
         public Vector2 playerInput = Vector2.Zero;
         private float timeBetweenMovement = .3f;
         private float movementClock = 0;
@@ -31,7 +30,7 @@ namespace Sokoban
         }
 
         public override void LoadContent(ContentManager content)
-        {
+        {           
             //Load animations
             animationsUp = new Texture2D[3];
             animationsIdle = new Texture2D[4];
@@ -98,8 +97,9 @@ namespace Sokoban
 
         private void Input(GameTime gameTime)
         {
+            keyboard = Keyboard.GetState();
             playerInput = Vector2.Zero;
-            KeyboardState keyboard = Keyboard.GetState();
+             
 
             float de = (float)gameTime.ElapsedGameTime.TotalSeconds;
             movementClock -= de;

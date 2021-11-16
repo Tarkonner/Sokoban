@@ -25,7 +25,8 @@ namespace Sokoban
         //Debug
         Texture2D collisionTexture;
 
-        private float testClock = 20;
+        private float testClock = 5;
+        private bool loadTestlevel = false;
 
 
         public GameWorld()
@@ -86,8 +87,25 @@ namespace Sokoban
 
             float de = (float)gameTime.ElapsedGameTime.TotalSeconds;
             testClock -= de;
-            if (testClock < 0)
+            if (testClock < 0 && !loadTestlevel)
+            {
+                loadTestlevel = true;
+
                 LoadLevel(1);
+                objectManeger.UpdateLoop();
+
+                //Load item
+                foreach (GameObject item in objectManeger.GameObjects)
+                {
+                    //Get GameObjects with collision
+                    if (item is GameObjectWithCollider)
+                        collisionList.Add((GameObjectWithCollider)item);
+                }
+
+                //Upload collision list to LookAround
+
+                LookAround.objects = collisionList;
+            }
 
             //Update all gameobjects
             foreach (GameObject item in objectManeger.GameObjects)
@@ -139,6 +157,8 @@ namespace Sokoban
                     objectManeger.Remove(item);
                 }
             }
+
+            collisionList.Clear();
 
             //Inscert level
             for (int y = 0; y < levels.levelHolder[targetLevel].GetLength(1); y++)
