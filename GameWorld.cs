@@ -20,11 +20,9 @@ namespace Sokoban
 
         //Gameobjcts
         private GameObjectManeger objectManeger = GameObjectManeger.Instance;
-        List<GameObjectWithCollider> collisionList = new List<GameObjectWithCollider>();
 
         //Debug
         Texture2D collisionTexture;
-
         private float testClock = 5;
         private bool loadTestlevel = false;
 
@@ -69,14 +67,7 @@ namespace Sokoban
             foreach (GameObject item in objectManeger.GameObjects)
             {
                 item.LoadContent(Content);
-                
-                //Get GameObjects with collision
-                if (item is GameObjectWithCollider)
-                    collisionList.Add((GameObjectWithCollider)item);
             }
-
-            //Upload collision list to LookAround
-            LookAround.objects = collisionList;
         }
 
         protected override void Update(GameTime gameTime)
@@ -93,18 +84,6 @@ namespace Sokoban
 
                 LoadLevel(1);
                 objectManeger.UpdateLoop();
-
-                //Load item
-                foreach (GameObject item in objectManeger.GameObjects)
-                {
-                    //Get GameObjects with collision
-                    if (item is GameObjectWithCollider)
-                        collisionList.Add((GameObjectWithCollider)item);
-                }
-
-                //Upload collision list to LookAround
-
-                LookAround.objects = collisionList;
             }
 
             //Update all gameobjects
@@ -114,9 +93,9 @@ namespace Sokoban
             }
 
             //Collision
-            foreach (GameObjectWithCollider item in collisionList)
+            foreach (GameObjectWithCollider item in objectManeger.CollisionList)
             {
-                foreach (GameObjectWithCollider other in collisionList)
+                foreach (GameObjectWithCollider other in objectManeger.CollisionList)
                 {
                     if (item != other)
                         item.CheckCollision(other);
@@ -154,11 +133,9 @@ namespace Sokoban
             {
                 foreach (var item in objectManeger.GameObjects)
                 {
-                    objectManeger.Remove(item);
+                    objectManeger.Destory(item);
                 }
             }
-
-            collisionList.Clear();
 
             //Inscert level
             for (int y = 0; y < levels.levelHolder[targetLevel].GetLength(1); y++)
@@ -167,10 +144,10 @@ namespace Sokoban
                 {
                     //Add floor if needed
                     if (levels.levelHolder[targetLevel][x, y] > 1)
-                        objectManeger.AddToWorld(levels.Object(0, x, y));
+                        objectManeger.Instantiate(levels.Object(0, x, y));
 
                     //Spawn object
-                    objectManeger.AddToWorld(levels.Object(levels.levelHolder[targetLevel][x, y], x, y));
+                    objectManeger.Instantiate(levels.Object(levels.levelHolder[targetLevel][x, y], x, y));
                 }
             }
         }

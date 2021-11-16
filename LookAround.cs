@@ -7,8 +7,6 @@ namespace Sokoban
 {
     public static class LookAround
     {
-        public static List<GameObjectWithCollider> objects = new List<GameObjectWithCollider>();
-
         public static GameObjectWithCollider LookAt(Vector2 position)
         {
             GameObjectWithCollider targetObject = null;
@@ -16,7 +14,7 @@ namespace Sokoban
             //Look
             Rectangle rec = new Rectangle((int)position.X, (int)position.Y, 1, 1);
 
-            foreach (GameObjectWithCollider item in objects)
+            foreach (GameObjectWithCollider item in GameObjectManeger.Instance.CollisionList)
             {
                 if (item.Trigger)
                     continue;

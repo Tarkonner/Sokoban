@@ -31,42 +31,42 @@ namespace Sokoban
         List<GameObject> addedGameObjects = new List<GameObject>(); //For gameobjectets der skal komme i gameObjevt listen
         List<GameObject> gameObjects = new List<GameObject>(); //For main loop
         List<GameObject> removingGameObjects = new List<GameObject>(); //For ting der skal fjernes
+        //Collision
+        List<GameObjectWithCollider> collisionList = new List<GameObjectWithCollider>();
 
         #region Properties
-        public List<GameObject> AddedGameObjects { get => addedGameObjects; set => addedGameObjects = value; }
+        //GameObject
         public List<GameObject> GameObjects { get => gameObjects; set => gameObjects = value; }
-        public List<GameObject> RemovingGameObjects { get => removingGameObjects; set => removingGameObjects = value; }
+        //Colision
+        public List<GameObjectWithCollider> CollisionList { get => collisionList; set => collisionList = value; }
         #endregion
+
+        public void SetContentManeger(ContentManager content)
+        {
+            this.content = content;
+        }
 
 
         public void UpdateLoop()
         {
             //Add if new gameobjects is added
-            CallAdd();
+            AddGameObjectToWorld();
 
             //Remove gameobjebts from the list
-            CallRemove();
+            RemoveGameObjectFromWorld();
         }
 
-        public void AddToWorld(GameObject target)
+        public void Instantiate(GameObject target)
         {
             addedGameObjects.Add(target);
         }
 
-        public void Remove(GameObject target)
+        public void Destory(GameObject target)
         {
             removingGameObjects.Add(target);
         }
 
-        public void Clear(List<GameObject> input)
-        {
-            foreach (var item in input)
-            {
-                removingGameObjects.Add(item);
-            }
-        }
-
-        private void CallAdd()
+        private void AddGameObjectToWorld()
         {
             if (addedGameObjects.Count > 0)
             {
@@ -74,26 +74,31 @@ namespace Sokoban
                 {
                     addedGameObjects[i].LoadContent(content);
                     gameObjects.Add(addedGameObjects[i]);
+
+                    //Add to collision if needed
+                    if (addedGameObjects[i] is GameObjectWithCollider)
+                        collisionList.Add((GameObjectWithCollider)addedGameObjects[i]);
                 }
                 addedGameObjects.Clear();
             }
         }
 
-        private void CallRemove()
+        private void RemoveGameObjectFromWorld()
         {
             if (removingGameObjects.Count > 0)
             {
                 for (int i = 0; i < removingGameObjects.Count; i++)
                 {
                     gameObjects.Remove(removingGameObjects[i]);
+
+                    //Remove from collision
+                    if (removingGameObjects[i] is GameObjectWithCollider)
+                        collisionList.Remove((GameObjectWithCollider)removingGameObjects[i]);
                 }
                 removingGameObjects.Clear();
             }
         }
 
-        public void SetContentManeger(ContentManager content)
-        {
-            this.content = content;
-        }
+
     }
 }
