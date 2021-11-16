@@ -21,9 +21,11 @@ namespace Sokoban
         //Gameobjcts
         private GameObjectManeger objectManeger = GameObjectManeger.Instance;
 
-        private float testClock = 5;
+        private float testClock = 10;
         private bool loadTestlevel = false;
 
+        //Musik
+        private Song backgroundMusic;
 
         public GameWorld()
         {
@@ -54,6 +56,13 @@ namespace Sokoban
 
             objectManeger.SetContentManeger(Content);
 
+            //Musik
+#if (!DEBUG)
+            backgroundMusic = Content.Load<Song>("592142");
+            MediaPlayer.Play(backgroundMusic);
+            MediaPlayer.IsRepeating = true;
+#endif
+
             //Load levels
             levels = new LevelManeger();
             //Uplow first level
@@ -71,14 +80,14 @@ namespace Sokoban
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
 
-#if(DEBUG)
+#if (DEBUG)
             float de = (float)gameTime.ElapsedGameTime.TotalSeconds;
             testClock -= de;
             if (testClock < 0 && !loadTestlevel)
             {
                 loadTestlevel = true;
 
-                levels.LoadLevel(1);
+                levels.LoadLevel(20);
             }
 #endif
 

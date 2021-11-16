@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Text;
 
 namespace Sokoban
@@ -74,7 +75,8 @@ namespace Sokoban
             }
             catch (Exception e)
             {
-
+                Debug.WriteLine("Error");
+                Debug.WriteLine(e);
             }
         }
     }
