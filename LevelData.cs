@@ -51,7 +51,7 @@ namespace Sokoban
             {1, 3, 0, 0, 0, 3,1},
             {1, 0, 0, 2, 0, 0,1},
             {1, 0, 0, 1, 0, 1,1},
-            {1, 1, 2, 1, 1, 1,1},
+            {1, 1, 2, 1, 0, 0,1},
             {1, 0, 0, 1, 0, 0,1},
             {1, 0, 0, 0, 0, 0,1},
             {1, 0, 1, 0, 1, 3,1},
@@ -65,8 +65,8 @@ namespace Sokoban
             {1, 1, 1, 1, 0, 1,1},
             {1, 3, 0, 0, 0, 3,1},
             {1, 0, 0, 2, 0, 0,1},
-            {1, 0, 0, 1, 0, 1,1},
-            {1, 1, 2, 1, 1, 1,1},
+            {1, 0, 0, 0, 0, 1,1},
+            {1, 0, 2, 0, 1, 1,1},
             {1, 0, 0, 1, 0, 0,1},
             {1, 0, 0, 0, 0, 0,1},
             {1, 0, 1, 0, 1, 3,1},
@@ -93,8 +93,8 @@ namespace Sokoban
 
         public LevelData()
         {
-         //   levelHolder.Add(level_0);
-          //  levelHolder.Add(level_1);
+            levelHolder.Add(level_0);
+            levelHolder.Add(level_1);
             levelHolder.Add(level_2);
             levelHolder.Add(level_3);
             levelHolder.Add(level_4);
