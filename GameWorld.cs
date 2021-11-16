@@ -20,13 +20,12 @@ namespace Sokoban
 
         //Gameobjcts
         private GameObjectManeger objectManeger = GameObjectManeger.Instance;
-        //List<GameObject> gameObject = new List<GameObject>();
         List<GameObjectWithCollider> collisionList = new List<GameObjectWithCollider>();
 
         //Debug
         Texture2D collisionTexture;
 
-        private float testClock = 5;
+        private float testClock = 20;
 
 
         public GameWorld()
@@ -63,7 +62,7 @@ namespace Sokoban
             levels = new LevelData();
             //Uplow first level
             LoadLevel(0);
-
+            objectManeger.UpdateLoop();
 
             //Load item
             foreach (GameObject item in objectManeger.GameObjects)
@@ -110,7 +109,7 @@ namespace Sokoban
             
             base.Update(gameTime);
 
-            objectManeger.UpdateLoop(gameTime);
+            objectManeger.UpdateLoop();
         }
 
         protected override void Draw(GameTime gameTime)

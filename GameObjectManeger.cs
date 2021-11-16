@@ -39,7 +39,7 @@ namespace Sokoban
         #endregion
 
 
-        public void UpdateLoop(GameTime gameTime)
+        public void UpdateLoop()
         {
             //Add if new gameobjects is added
             CallAdd();
