@@ -11,12 +11,16 @@ namespace Sokoban
 {
     public class GameWorld : Game
     {
+        //Tech
         private GraphicsDeviceManager graphics;
         private SpriteBatch spriteBatch;
 
+        //Level
         private LevelData levels;
 
-        List<GameObject> gameObject = new List<GameObject>();
+        //Gameobjcts
+        private GameObjectManeger objectManeger = GameObjectManeger.Instance;
+        //List<GameObject> gameObject = new List<GameObject>();
         List<GameObjectWithCollider> collisionList = new List<GameObjectWithCollider>();
 
         //Debug
@@ -53,6 +57,7 @@ namespace Sokoban
             spriteBatch = new SpriteBatch(GraphicsDevice);
 
             collisionTexture = Content.Load<Texture2D>("CollisionTexture");
+            objectManeger.SetContentManeger(Content);
 
             //Load levels
             levels = new LevelData();
@@ -61,7 +66,7 @@ namespace Sokoban
 
 
             //Load item
-            foreach (GameObject item in gameObject)
+            foreach (GameObject item in objectManeger.GameObjects)
             {
                 item.LoadContent(Content);
                 
@@ -80,8 +85,13 @@ namespace Sokoban
                 Exit();
 
 
+            float de = (float)gameTime.ElapsedGameTime.TotalSeconds;
+            testClock -= de;
+            if (testClock < 0)
+                LoadLevel(1);
+
             //Update all gameobjects
-            foreach (GameObject item in gameObject)
+            foreach (GameObject item in objectManeger.GameObjects)
             {
                 item.Update(gameTime);
             }
@@ -95,15 +105,12 @@ namespace Sokoban
                         item.CheckCollision(other);
                 }
             }
-
+                       
+         
+            
             base.Update(gameTime);
 
-            /*
-            float de = (float)gameTime.ElapsedGameTime.TotalSeconds;
-            testClock -= de;
-            if (testClock < 0)
-                LoadLevel(1);
-            */
+            objectManeger.UpdateLoop(gameTime);
         }
 
         protected override void Draw(GameTime gameTime)
@@ -113,7 +120,7 @@ namespace Sokoban
             // TODO: Add your drawing code here
             spriteBatch.Begin(SpriteSortMode.FrontToBack);
 
-            foreach (var item in gameObject)
+            foreach (var item in objectManeger.GameObjects)
             {
                 item.Draw(spriteBatch);
             }
@@ -126,8 +133,13 @@ namespace Sokoban
         public void LoadLevel(int targetLevel)
         {
             //Remove old level
-            if (gameObject.Count > 0)
-                gameObject.Clear();
+            if (objectManeger.GameObjects.Count > 0)
+            {
+                foreach (var item in objectManeger.GameObjects)
+                {
+                    objectManeger.Remove(item);
+                }
+            }
 
             //Inscert level
             for (int y = 0; y < levels.levelHolder[targetLevel].GetLength(1); y++)
@@ -136,10 +148,10 @@ namespace Sokoban
                 {
                     //Add floor if needed
                     if (levels.levelHolder[targetLevel][x, y] > 1)
-                        gameObject.Add(levels.Object(0, x, y));
+                        objectManeger.AddToWorld(levels.Object(0, x, y));
 
                     //Spawn object
-                    gameObject.Add(levels.Object(levels.levelHolder[targetLevel][x, y], x, y));
+                    objectManeger.AddToWorld(levels.Object(levels.levelHolder[targetLevel][x, y], x, y));
                 }
             }
         }
