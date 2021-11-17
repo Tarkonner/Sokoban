@@ -3,7 +3,6 @@ using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Media;
-using Sokoban.UI;
 using System.Collections.Generic;
 
 
@@ -43,12 +42,12 @@ namespace Sokoban
         protected override void Initialize()
         {
             // TODO: Add your initialization logic here
-            this.Components.Add(new Ui(this));
+           
             base.Initialize();
 
-//#if (!DEBUG)
-//            graphics.ApplyChanges();
-//#endif
+#if (!DEBUG)
+            graphics.ApplyChanges();
+#endif
         }
 
         protected override void LoadContent()
@@ -56,8 +55,6 @@ namespace Sokoban
             spriteBatch = new SpriteBatch(GraphicsDevice);
 
             objectManeger.SetContentManeger(Content);
-
-            
 
             //Musik
 #if (!DEBUG)
@@ -67,9 +64,9 @@ namespace Sokoban
 #endif
 
             //Load levels
-            //levels = new LevelManeger();
-            ////Uplow first level
-            //levels.LoadLevel(0);
+            levels = new LevelManeger();
+            //Uplow first level
+            levels.LoadLevel(0);
 
             //Load item
             foreach (GameObject item in objectManeger.GameObjects)
@@ -90,6 +87,7 @@ namespace Sokoban
             {
                 loadTestlevel = true;
 
+                levels.LoadLevel(20);
             }
 #endif
 
