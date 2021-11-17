@@ -129,13 +129,18 @@ namespace Sokoban
             rectangle = new Rectangle((int)position.X, (int)position.Y, sprite.Width, sprite.Height);
         }
 
+        public override void Update(GameTime gameTime)
+        {
+            Animate(gameTime);
+            Input(gameTime);
+        }
 
         private void Input(GameTime gameTime)
         {
             keyboard = Keyboard.GetState();
             playerInput = Vector2.Zero;
 
-
+            //Timer for time between movement
             float de = (float)gameTime.ElapsedGameTime.TotalSeconds;
             movementClock -= de;
 
@@ -163,18 +168,20 @@ namespace Sokoban
 
             //Movement
             if (movementClock <= 0 && playerInput != Vector2.Zero)
-            {
+            {               
                 Movement(playerInput);
                 movementClock = timeBetweenMovement;
                 soundEffectInstance.Stop();
                 soundEffectInstance.Play();
             }
-        }
 
-        public override void Update(GameTime gameTime)
-        {
-            Animate(gameTime);
-            Input(gameTime);
+            //Undo movement
+            PressedKey pressedKey = new PressedKey();
+            if (PressedKey.HasBeenPressed(Keys.Z))
+            {
+                Undo.Instance.PutOnStack();
+                Undo.Instance.MoveBack();
+            }
         }
 
         private void Movement(Vector2 direction)
@@ -192,6 +199,13 @@ namespace Sokoban
                 if (result)
                     MoveInDirection(direction);
             }
+        }
+
+        protected override void MoveInDirection(Vector2 direction)
+        {
+
+            base.MoveInDirection(direction);
+            Undo.Instance.PutOnStack();
         }
 
         public override void OnCollision(GameObject other)

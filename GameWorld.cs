@@ -16,13 +16,10 @@ namespace Sokoban
         private SpriteBatch spriteBatch;
 
         //Level
-        private LevelManeger levels;
+        private LevelManeger levels = new LevelManeger();
 
         //Gameobjcts
         private GameObjectManeger objectManeger = GameObjectManeger.Instance;
-
-        private float testClock = 10;
-        private bool loadTestlevel = false;
 
         //Musik
         private Song backgroundMusic;
@@ -63,8 +60,6 @@ namespace Sokoban
             MediaPlayer.IsRepeating = true;
 #endif
 
-            //Load levels
-            levels = new LevelManeger();
             //Uplow first level
             levels.LoadLevel(0);
 
@@ -77,19 +72,8 @@ namespace Sokoban
 
         protected override void Update(GameTime gameTime)
         {
-            if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
+            if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || PressedKey.GetState().IsKeyDown(Keys.Escape))
                 Exit();
-
-#if (DEBUG)
-            float de = (float)gameTime.ElapsedGameTime.TotalSeconds;
-            testClock -= de;
-            if (testClock < 0 && !loadTestlevel)
-            {
-                loadTestlevel = true;
-
-                levels.LoadLevel(20);
-            }
-#endif
 
             //Update all gameobjects
             foreach (GameObject item in objectManeger.GameObjects)
@@ -107,10 +91,9 @@ namespace Sokoban
                 }
             }
                        
-         
-            
             base.Update(gameTime);
 
+            //Update collision
             objectManeger.UpdateLoop();
         }
 
