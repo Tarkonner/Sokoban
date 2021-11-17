@@ -3,7 +3,6 @@ using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Media;
-using Sokoban.UI;
 using System.Collections.Generic;
 
 
@@ -40,8 +39,7 @@ namespace Sokoban
         protected override void Initialize()
         {
             // TODO: Add your initialization logic here
-            this.Components.Add(new Ui(this));
-
+           
             base.Initialize();
 
 #if (!DEBUG)
@@ -61,6 +59,9 @@ namespace Sokoban
             MediaPlayer.Play(backgroundMusic);
             MediaPlayer.IsRepeating = true;
 #endif
+
+            //Uplow first level
+            levels.LoadLevel(0);
 
             //Load item
             foreach (GameObject item in objectManeger.GameObjects)

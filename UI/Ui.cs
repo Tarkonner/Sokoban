@@ -54,7 +54,7 @@ namespace Sokoban.UI
                 Text = "Level 3",
                 Size = new Vector2(200, 43),
                 BackgroundColor = Color.White,
-                Location = new Vector2(270, 265),
+                Location = new Vector2(270, 260),
                 TextColor = Color.Black,
             };
 
@@ -63,7 +63,7 @@ namespace Sokoban.UI
                 Text = "Level 4",
                 Size = new Vector2(200, 43),
                 BackgroundColor = Color.White,
-                Location = new Vector2(270, 320),
+                Location = new Vector2(270, 260),
                 TextColor = Color.Black,
             };
 
@@ -72,7 +72,7 @@ namespace Sokoban.UI
                 Text = "Level 5",
                 Size = new Vector2(200, 43),
                 BackgroundColor = Color.White,
-                Location = new Vector2(270, 375),
+                Location = new Vector2(270, 460),
                 TextColor = Color.Black,
             };
 
