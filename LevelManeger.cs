@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Text;
 
 namespace Sokoban
@@ -20,7 +21,7 @@ namespace Sokoban
             levelHolder.Add(LevelData.level_4);
         }
 
-        private GameObject Object(int whatObjects, float xPos, float yPos)
+        public GameObject Object(int whatObjects, float xPos, float yPos)
         {
             switch (whatObjects)
             {
@@ -72,14 +73,10 @@ namespace Sokoban
 
                 objectManeger.UpdateLoop();
             }
-            catch (IndexOutOfRangeException e)
+            catch (Exception e)
             {
-                Console.WriteLine($"No level of {targetLevel} number found. There are {levelHolder.Count} levels");
-                Console.WriteLine(e.Message);
-            }
-            catch(Exception e)
-            {
-                Console.WriteLine("heJ" + e.Message);
+                Debug.WriteLine("Error");
+                Debug.WriteLine(e);
             }
         }
     }
