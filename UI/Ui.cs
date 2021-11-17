@@ -27,7 +27,7 @@ namespace Sokoban.UI
                 TextColor = Color.Black,
             };
 
-
+            btn1.Clicked += Btn1_Clicked;
 
             Controls.Add(btn1);
 
@@ -84,9 +84,8 @@ namespace Sokoban.UI
             Controls.Add(level4);
             Controls.Add(level5);
 
-            btn1.Clicked += Btn1_Clicked;
-
         }
+
 
 
         private void Btn1_Clicked(object sender, EventArgs e)
@@ -95,10 +94,6 @@ namespace Sokoban.UI
             Button btn = sender as Button;
 
             Controls.Remove(btn);
-
-
-
-
 
 
             var btn2 = new Button()
