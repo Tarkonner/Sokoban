@@ -673,6 +673,13 @@
 /processorParam:TextureFormat=Color
 /build:crate_45.png
 
+#begin defaultFont.spritefont
+/importer:FontDescriptionImporter
+/processor:FontDescriptionProcessor
+/processorParam:PremultiplyAlpha=True
+/processorParam:TextureFormat=Compressed
+/build:defaultFont.spritefont
+
 #begin environment_01.png
 /importer:TextureImporter
 /processor:TextureProcessor
