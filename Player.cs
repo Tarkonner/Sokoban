@@ -177,6 +177,7 @@ namespace Sokoban
 
             //Undo movement
             PressedKey pressedKey = new PressedKey();
+
             if (PressedKey.HasBeenPressed(Keys.Z))
             {
                 Undo.Instance.PutOnStack();

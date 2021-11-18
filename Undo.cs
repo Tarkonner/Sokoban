@@ -1,7 +1,5 @@
 ﻿using Microsoft.Xna.Framework;
-using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace Sokoban
 {
@@ -29,7 +27,7 @@ namespace Sokoban
 
         public void PutOnStack()
         {
-            if(colletedMoves != null)
+            if (colletedMoves != null)
             {
                 movementLists.Push(colletedMoves);
                 colletedMoves = null;
@@ -49,26 +47,20 @@ namespace Sokoban
             MovementList lastStep = null;
 
             if (movementLists.Count == 1)
-            {
                 lastStep = movementLists.Peek();
-            }
             else if (movementLists.Count > 1)
-            {
                 lastStep = movementLists.Pop();
-            }
 
-            if(lastStep != null)
+            if (lastStep != null)
                 UpdatePositions(lastStep);
         }
 
         void UpdatePositions(MovementList target)
         {
-                for (int i = 0; i < target.Objs.Count; i++)
-                {
-                    target.Objs[i].SetPosition(target.Moves[i]);
-                }
+            for (int i = 0; i < target.Objs.Count; i++)
+                target.Objs[i].SetPosition(target.Moves[i]);
 
-                colletedMoves = null;
-            }
+            colletedMoves = null;
+        }
     }
 }
