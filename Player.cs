@@ -108,9 +108,6 @@ namespace Sokoban
             sprite = animations[0];
 
             walkSound = content.Load<SoundEffect>("326543__sqeeeek__wetfootsteps");
-
-
-
             soundEffectInstance = walkSound.CreateInstance();
             soundEffectInstance.IsLooped = false;
 
